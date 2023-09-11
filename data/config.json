@@ -1,0 +1,55 @@
+{
+  "project": {
+    "name": "Kunsthaus",
+    "quality": 1
+  },
+  "loader": {
+    "info": "data/info.md",
+    "items": "data/data.csv",
+    "layouts": [
+      {
+        "title": "Time"
+      },
+      {
+        "title": "Similarity",
+        "url": "data/projection.csv",
+        "scale": 0.8
+      }
+    ],
+    "textures": {
+      "medium": {
+        "size": 200,
+        "url": "data/sprites/spritesheet.json"
+      },
+      "detail": {
+        "size": 1024,
+        "url": "data/1024/"
+      },
+      "big": {
+        "size": 4096,
+        "url": "data/4096/"
+      }
+    }
+  },
+  "style": {
+    "fontColor": "#333333",
+    "fontColorActive": "#f0f0f0",
+    "fontBackground": "#333333",
+    "textShadow": "1px 1px 0px #f8f4e9",
+    "canvasBackground": "#f0f0f0",
+    "timelineBackground": "#fff9eb",
+    "timelineFontColor": "#000",
+    "backgroundHeader": "#333333",
+    "fontColorHeader": "#C6C6C6",
+    "detailBackground": "#EEE",
+    "infoBackground": "#333333",
+    "infoFontColor": "#f0f0f0",
+    "searchbarBackground": "#DAA520"
+  },
+  "projection": {
+    "columns": 3
+  },
+  "detail": {
+    "structure": []
+  }
+}
