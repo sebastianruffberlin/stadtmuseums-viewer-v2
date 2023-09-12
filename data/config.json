@@ -18,6 +18,12 @@
         "groupKey": "stadt"
       },
       {
+        "title": "Kaufpreis",
+        "type": "csv",
+        "url": "data/preis.csv",
+        "scale": 0.8
+      },
+      {
         "title": "Similarity",
         "type": "csv",
         "url": "data/projection.csv",

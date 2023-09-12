@@ -755,7 +755,7 @@ function Canvas() {
     var dimension = Math.min(width, height) * 0.8;
 
     inactive.forEach(function (d, i) {
-      var r = dimension / 1.9 + Math.random() * 40;
+      var r = dimension / 1.4 + Math.random() * 40;
       var a = -Math.PI / 2 + (i / inactiveSize) * 2 * Math.PI;
 
       d.x = r * Math.cos(a) + width / 2 + margin.left;
@@ -768,10 +768,13 @@ function Canvas() {
       if (tsneEntry) {
         d.x =
           tsneEntry[0] * dimension + width / 2 - dimension / 2 + margin.left;
-        d.y = tsneEntry[1] * dimension - dimension / 2 + marginBottom;
+        d.y = -1 * tsneEntry[1] * dimension;
       } else {
         // console.log("not found", d)
         d.alpha = 0;
+        d.x = 0;
+        d.y = 0;
+        d.active = false;
       }
       // var tsneEntry = tsne.find(function (t) {
       //     return t.id == d.id
