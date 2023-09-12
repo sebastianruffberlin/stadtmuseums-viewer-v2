@@ -516,7 +516,7 @@ function Canvas() {
     state.zoomingToImage = true;
     zoom.center(null);
     loadMiddleImage(d);
-    d3.select(".tagcloud").classed("hide", true);
+    d3.select(".filter").classed("hide", true);
     var padding = (state.mode == "time" ? 0.1 : 0.8) * rangeBandImage;
     var sidbar = width / 8;
     var scale =
@@ -643,11 +643,11 @@ function Canvas() {
 
     // toggle zoom overlays
     if (scale > zoomBarrier) {
-      d3.select(".tagcloud").classed("hide", true);
+      d3.select(".filter").classed("hide", true);
       d3.select(".searchbar").classed("hide", true);
       d3.select(".infobar").classed("sneak", true);
     } else {
-      d3.select(".tagcloud").classed("hide", false);
+      d3.select(".filter").classed("hide", false);
       d3.select(".searchbar").classed("hide", false);
     }
 

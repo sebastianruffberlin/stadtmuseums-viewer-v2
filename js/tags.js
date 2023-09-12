@@ -14,7 +14,7 @@ function Tags() {
     console.log("init tags", _data, config)
     data = _data;
 
-    container = d3.select("#kaufer");
+    container = d3.select(".verkaufer");
 
     kaufer = d3.nest()
       .key(function (d) { return d.vorbesitzerin; })
@@ -27,11 +27,11 @@ function Tags() {
     fontsize.domain(d3.extent(kaufer, function (d) { return d.values.length; }))
 
     container.select(".list")
-      .selectAll(".kaufer")
+      .selectAll(".item")
       .data(kaufer)
       .enter()
       .append("div")
-      .classed("kaufer", true)
+      .classed("item", true)
       .text(function (d) {
         return d.key// + " " + d.values.length + "";
       })
@@ -64,7 +64,7 @@ function Tags() {
 
   tags.update = function () {
     container.select(".list")
-      .selectAll(".kaufer")
+      .selectAll(".item")
       .classed("active", function (d) {
         return filter.vorbesitzerin == d.key;
       })

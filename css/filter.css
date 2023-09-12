@@ -1,34 +1,65 @@
-.filter .header {
+.filter {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 100;
+}
+
+.filter.hide {
+    opacity: 0;
+}
+
+
+.topfilter {
+    top: 20px;
+    position: absolute;
+    color: #5e5e5e;
+    /* color: #C6C6C6; */
+    z-index: 100;
+    padding: 10px;
+    /* background-color: #EFF2F3; */
+    /* background-color: #4A4A4A; */
+    user-select: none;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    border-bottom: 1px solid #939393;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.filter .header .title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-right: 1rem;
-    flex-grow: 1;
-}
-
-.filter .select {
-    flex-shrink: 0;
+.topfilter .items {
     display: flex;
-    flex-direction: row;
-
 }
 
-.filter .select label {
-    font-size: 0.8rem;
-    margin-right: 0.5rem;
-    margin-top: 0.2rem;
+.topfilter .items>div {
+    padding: 6px;
     cursor: pointer;
+    margin: 2px;
+    /* background-color: #aaaaaa; */
 }
 
-#kaufer {
+.topfilter .items>div.active {
+    background-color: #939393;
+    color: #FFF;
+    /* background-color: #DAA520; */
+    /* color: #333333; */
+}
+
+.besitz {
+    left: 20px;
+}
+
+.raubkunst {
+    left: 400px;
+}
+
+.epoche {
+    left: 780px;
+}
+
+
+.verkaufer {
     position: absolute;
     top: 0px;
     right: 0px;
@@ -38,22 +69,58 @@
     color: #5e5e5e;
     z-index: 100;
     text-align: right;
-    height: 100%;
+    height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
+    user-select: none;
 }
 
-#kaufer .list {
+.verkaufer .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #939393;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.verkaufer.header .title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-right: 1rem;
+    flex-grow: 1;
+}
+
+.verkaufer .select {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.verkaufer .select label {
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    margin-top: 0.2rem;
+    cursor: pointer;
+}
+
+
+.verkaufer .list {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
+
 }
 
-#kaufer .kaufer {
+.verkaufer .item {
     cursor: pointer;
-    display: inline;
+    display: inline-flex;
+    padding: 3px;
+    line-height: 1;
 }
 
-#kaufer .kaufer.active {
+.verkaufer .item.active {
     background-color: #939393;
     color: #fff;
 }
