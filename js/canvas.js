@@ -197,13 +197,32 @@ function Canvas() {
           })
       };
     });
+    console.log("canvasDomain", canvasDomain);
+    console.log("timeDomain", timeDomain);
 
+
+    timeline.init(timeDomain);
+    x.domain(canvasDomain);
+
+  };
+
+  canvas.setCustomTimelineData = function () {
+    timelineData = [{ "x": "54", "key": "200" }, { "x": "182", "key": "1k" }, { "x": "237", "key": "2k" }, { "x": "365", "key": "10k" }, { "x": "420", "key": "20k" }, { "x": "548", "key": "100k" }, { "x": "603", "key": "200k" }, { "x": "731", "key": "1M" }, { "x": "786", "key": "2M" }]
+    canvasDomain = timelineData.map(d => d.key)
+    timeDomain = timelineData.map(function (d) {
+      return {
+        key: d.key,
+        values: [],
+        type: "static",
+
+      };
+    });
     timeline.init(timeDomain);
     x.domain(canvasDomain);
 
     console.log("canvasDomain", canvasDomain);
     console.log("timeDomain", timeDomain);
-  };
+  }
 
   canvas.init = function (_data, _timeline, _config) {
     data = _data;
@@ -498,8 +517,11 @@ function Canvas() {
     if (layout.type == "group") {
       canvas.initGroupLayout();
     }
+    if (layout.timeline) {
+      canvas.setCustomTimelineData()
+    }
 
-    timeline.setDisabled(layout.type != "group");
+    timeline.setDisabled(layout.type != "group" && !layout.timeline);
     canvas.makeScales();
     canvas.project();
   };

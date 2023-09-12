@@ -21,6 +21,7 @@
         "title": "Kaufpreis",
         "type": "csv",
         "url": "data/preis.csv",
+        "timeline": true,
         "scale": 0.8
       },
       {
