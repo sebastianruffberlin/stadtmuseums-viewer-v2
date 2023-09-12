@@ -138,13 +138,13 @@ function init() {
     console.log(config.loader.layouts);
 
     config.loader.layouts.forEach((d, i) => {
-      d.title = d.title.toLowerCase();
-      if (d.title === "time") {
-        canvas.setMode(d.title);
-      } else {
+      // d.title = d.title.toLowerCase();
+      if (d.id === "time") {
+        canvas.setMode(d.id);
+      } else if (d.url) {
         d3.csv(utils.makeUrl(baseUrl.path, d.url), function (tsne) {
-          canvas.addTsneData(d.title, tsne, d.scale);
-          if (i == 0) canvas.setMode(d.title);
+          canvas.addTsneData(d.id, tsne, d.scale);
+          if (i == 0) canvas.setMode(d.id);
         });
       }
     });
@@ -161,15 +161,15 @@ function init() {
       .text((d) => d.title);
 
     s.on("click", function (d) {
-      canvas.setMode(d.title);
+      canvas.setMode(d.id);
       d3.selectAll(".navi .button").classed(
         "active",
-        (d) => d.title == canvas.getMode()
+        (d) => d.id == canvas.getMode()
       );
     });
     d3.selectAll(".navi .button").classed(
       "active",
-      (d) => d.title == config.loader.layouts[0].title
+      (d) => d.id == config.loader.layouts[0].id
     );
   }
 }

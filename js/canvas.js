@@ -24,6 +24,7 @@ function Canvas() {
   var translate = [0, 0];
   var scale = 1;
   var timeDomain = [];
+  var canvasDomain = [];
   var loadImagesCue = [];
 
   var x = d3.scale
@@ -89,6 +90,7 @@ function Canvas() {
     zoomingToImage: false,
     mode: "time",
     init: false,
+    groupKey: "year",
   };
 
   var zoomedToImage = false;
@@ -169,9 +171,45 @@ function Canvas() {
     // console.log("zoomedToImageScale", zoomedToImageScale)
   };
 
+  canvas.initGroupLayout = function () {
+
+    canvasDomain = d3
+      .nest()
+      .key(function (d) {
+        return d[state.groupKey];
+      })
+      .entries(data.concat(timelineData))
+      .sort(function (a, b) {
+        return a.key - b.key;
+      })
+      .map(function (d) {
+        return d.key;
+      });
+
+    timeDomain = canvasDomain.map(function (d) {
+      return {
+        key: d,
+        values: timelineData
+          .filter(function (e) {
+            return d == e[state.groupKey];
+          }).map(function (e) {
+            e.type = "timeline";
+            return e;
+          })
+      };
+    });
+
+    timeline.init(timeDomain);
+    x.domain(canvasDomain);
+
+    console.log("canvasDomain", canvasDomain);
+    console.log("timeDomain", timeDomain);
+  };
+
   canvas.init = function (_data, _timeline, _config) {
     data = _data;
     config = _config;
+    timelineData = _timeline;
 
     container = d3.select(".page").append("div").classed("viz", true);
     detailVue._data.structure = config.detail.structure;
@@ -216,34 +254,8 @@ function Canvas() {
     stage2.addChild(stage4);
     stage2.addChild(stage5);
 
-    _timeline.forEach(function (d) {
-      d.type = "timeline";
-    });
+    canvas.initGroupLayout();
 
-    var canvasDomain = d3
-      .nest()
-      .key(function (d) {
-        return d.year;
-      })
-      .entries(_data.concat(_timeline))
-      .sort(function (a, b) {
-        return a.key - b.key;
-      })
-      .map(function (d) {
-        return d.key;
-      });
-
-    timeDomain = canvasDomain.map(function (d) {
-      return {
-        key: d,
-        values: _timeline.filter(function (e) {
-          return d == e.year;
-        }),
-      };
-    });
-
-    timeline.init(timeDomain);
-    x.domain(canvasDomain);
     //canvas.makeScales();
 
     // add preview pics
@@ -384,7 +396,7 @@ function Canvas() {
     var years = d3
       .nest()
       .key(function (d) {
-        return d.year;
+        return d[state.groupKey];
       })
       .entries(data);
 
@@ -482,7 +494,17 @@ function Canvas() {
 
   canvas.setMode = function (mode) {
     state.mode = mode;
-    timeline.setDisabled(mode != "time");
+    var oldGroupKey = state.groupKey;
+    if (mode == "time") {
+      state.groupKey = "year";
+    } else if (mode == "ort") {
+      state.groupKey = "stadt";
+    }
+    if (oldGroupKey != state.groupKey) {
+      canvas.initGroupLayout();
+    }
+
+    timeline.setDisabled(mode != "time" || mode != "ort");
     canvas.makeScales();
     canvas.project();
   };
@@ -499,28 +521,28 @@ function Canvas() {
     renderer.render(stage);
   }
 
-  function zoomToYear(d) {
-    var xYear = x(d.year);
-    var scale = 1 / ((rangeBand * 4) / width);
-    var padding = rangeBand * 1.5;
-    var translateNow = [-scale * (xYear - padding), -scale * (height + d.y)];
+  // function zoomToYear(d) {
+  //   var xYear = x(d.year);
+  //   var scale = 1 / ((rangeBand * 4) / width);
+  //   var padding = rangeBand * 1.5;
+  //   var translateNow = [-scale * (xYear - padding), -scale * (height + d.y)];
 
-    vizContainer
-      .call(zoom.translate(translate).event)
-      .transition()
-      .duration(2000)
-      .call(zoom.scale(scale).translate(translateNow).event);
-  }
+  //   vizContainer
+  //     .call(zoom.translate(translate).event)
+  //     .transition()
+  //     .duration(2000)
+  //     .call(zoom.scale(scale).translate(translateNow).event);
+  // }
 
   function zoomToImage(d, duration) {
     state.zoomingToImage = true;
     zoom.center(null);
     loadMiddleImage(d);
     d3.select(".filter").classed("hide", true);
-    var padding = (state.mode == "time" ? 0.1 : 0.8) * rangeBandImage;
+    var padding = ((state.mode == "time" || state.mode == "ort") ? 0.1 : 0.8) * rangeBandImage;
     var sidbar = width / 8;
     var scale =
-      (0.8 / (rangeBandImage / width)) * (state.mode == "time" ? 1 : 0.4);
+      (0.8 / (rangeBandImage / width)) * ((state.mode == "time" || state.mode == "ort") ? 1 : 0.4);
     console.log(d, padding);
     //* (state.mode == "time" ? 1 : 0.5)
     var translateNow = [
@@ -697,7 +719,7 @@ function Canvas() {
 
   canvas.project = function () {
     sleep = false;
-    var scaleFactor = state.mode == "time" ? 0.9 : tsneScale[state.mode] || 0.5;
+    var scaleFactor = (state.mode == "time" || state.mode == "ort") ? 0.9 : tsneScale[state.mode] || 0.5;
     data.forEach(function (d) {
       d.scaleFactor = scaleFactor;
       d.sprite.scale.x = d.scaleFactor;
@@ -708,7 +730,7 @@ function Canvas() {
       }
     });
 
-    if (state.mode == "time") {
+    if ((state.mode == "time" || state.mode == "ort")) {
       canvas.split();
       cursorCutoff = (1 / scale1) * imageSize * 0.48;
     } else {
@@ -720,7 +742,7 @@ function Canvas() {
 
     zoomedToImageScale =
       (0.8 / (x.rangeBand() / collumns / width)) *
-      (state.mode == "time" ? 1 : 0.5);
+      ((state.mode == "time" || state.mode == "ort") ? 1 : 0.5);
   };
 
   canvas.projectTSNE = function () {

@@ -11,7 +11,7 @@ function Tags() {
   function tags() { }
 
   tags.init = function (_data, config) {
-    console.log("init tags", _data, config)
+    // console.log("init tags", _data, config)
     data = _data;
 
     container = d3.select(".verkaufer");
@@ -22,7 +22,7 @@ function Tags() {
       .sort(function (a, b) {
         return b.values.length - a.values.length;
       })
-    console.log(kaufer)
+    // console.log(kaufer)
 
     fontsize.domain(d3.extent(kaufer, function (d) { return d.values.length; }))
 
@@ -71,10 +71,10 @@ function Tags() {
   }
 
   tags.filter = function (highlight) {
-    console.log("update filter", filter)
+    // console.log("update filter", filter)
 
     var filters = Object.entries(highlight || filter).filter(function (d) { return d[1]; })
-    console.log(filters)
+    // console.log(filters)
     data.forEach(function (d) {
       var active = filters.filter(function (f) {
         return d[f[0]] == f[1];

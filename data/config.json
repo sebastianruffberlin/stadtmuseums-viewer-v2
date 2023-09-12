@@ -8,10 +8,16 @@
     "items": "data/data.csv",
     "layouts": [
       {
-        "title": "Time"
+        "title": "Zeit",
+        "id": "time"
+      },
+      {
+        "title": "Ort",
+        "id": "ort"
       },
       {
         "title": "Similarity",
+        "id": "similarity",
         "url": "data/projection.csv",
         "scale": 0.8
       }
