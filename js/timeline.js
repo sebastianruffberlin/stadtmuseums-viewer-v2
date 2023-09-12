@@ -22,10 +22,13 @@ function Timeline() {
   var fontSize = 1;
   var disabled = false;
 
-  function timeline() {}
+  function timeline() { }
 
   timeline.init = function (_timeDomain) {
     timeDomain = _timeDomain;
+    if (!d3.select(".timeline").empty()) {
+      d3.select(".timeline").remove();
+    }
     container = d3.select(".viz").append("div").classed("timeline", true);
     container.style(
       "transform",

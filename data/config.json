@@ -9,15 +9,17 @@
     "layouts": [
       {
         "title": "Zeit",
-        "id": "time"
+        "type": "group",
+        "groupKey": "year"
       },
       {
         "title": "Ort",
-        "id": "ort"
+        "type": "group",
+        "groupKey": "stadt"
       },
       {
         "title": "Similarity",
-        "id": "similarity",
+        "type": "csv",
         "url": "data/projection.csv",
         "scale": 0.8
       }

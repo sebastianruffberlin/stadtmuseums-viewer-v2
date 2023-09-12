@@ -10,6 +10,7 @@
 
 .filter.hide {
     opacity: 0;
+    pointer-events: none;
 }
 
 
@@ -82,6 +83,7 @@
     border-bottom: 1px solid #939393;
     padding-bottom: 5px;
     margin-bottom: 5px;
+    gap: 10px;
 }
 
 .verkaufer.header .title {
