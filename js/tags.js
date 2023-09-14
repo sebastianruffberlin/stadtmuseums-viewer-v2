@@ -4,9 +4,20 @@ function Tags() {
 
   var fontsize = d3.scale.linear().range([11, 23])
 
-  var filter = { emigrationverfolgung: false, vorbesitzerin: false };
+  var filter = { emigrationverfolgung: [], vorbesitzerin: [] };
   var kaufer = [];
   var lock = false
+
+  function addOrRemove(array, value) {
+    array = array.slice();
+    var index = array.indexOf(value);
+    if (index > -1) {
+      array.splice(index, 1);
+    } else {
+      array.push(value);
+    }
+    return array;
+  }
 
   function tags() { }
 
@@ -40,14 +51,16 @@ function Tags() {
       })
       .on("click", function (d) {
         lock = true;
-        filter.vorbesitzerin = filter.vorbesitzerin == d.key ? false : d.key;
+        filter.vorbesitzerin = addOrRemove(filter.vorbesitzerin, d.key);
         tags.filter();
         tags.update();
         lock = false;
       })
       .on("mouseenter", function (d) {
         if (lock) return;
-        tags.filter({ ...filter, vorbesitzerin: d.key });
+        filtercopy = Object.assign({}, filter);
+        filtercopy.vorbesitzerin = addOrRemove(filter.vorbesitzerin, d.key)
+        tags.filter(filtercopy);
       })
       .on("mouseleave", function (d) {
         if (lock) return;
@@ -57,7 +70,7 @@ function Tags() {
     container.select("#kauferemi")
       .on("change", function () {
         var isChecked = d3.select(this).property("checked");
-        filter.emigrationverfolgung = isChecked ? "JA" : false;
+        // filter.emigrationverfolgung = isChecked ? "JA" : false;
         tags.filter();
       })
   }
@@ -66,18 +79,18 @@ function Tags() {
     container.select(".list")
       .selectAll(".item")
       .classed("active", function (d) {
-        return filter.vorbesitzerin == d.key;
+        return filter.vorbesitzerin.indexOf(d.key) > -1;
       })
   }
 
   tags.filter = function (highlight) {
-    // console.log("update filter", filter)
+    console.log("update filter", filter, highlight)
 
-    var filters = Object.entries(highlight || filter).filter(function (d) { return d[1]; })
+    var filters = Object.entries(highlight || filter).filter(function (d) { return d[1].length; })
     // console.log(filters)
     data.forEach(function (d) {
       var active = filters.filter(function (f) {
-        return d[f[0]] == f[1];
+        return f[1].indexOf(d[f[0]]) > -1;
       }).length == filters.length;
 
       if (highlight) {

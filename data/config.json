@@ -13,12 +13,18 @@
         "groupKey": "year"
       },
       {
+        "title": "Kaufpreis",
+        "type": "group",
+        "groupKey": "year",
+        "x": "kaufpreis"
+      },
+      {
         "title": "Ort",
         "type": "group",
         "groupKey": "stadt"
       },
       {
-        "title": "Kaufpreis",
+        "title": "Kaufpreis Old",
         "type": "csv",
         "url": "data/preis.csv",
         "timeline": true,
