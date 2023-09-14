@@ -37,7 +37,7 @@
     padding: 6px;
     cursor: pointer;
     margin: 2px;
-    /* background-color: #aaaaaa; */
+    background-color: #FFF;
 }
 
 .topfilter .items>div.active {
@@ -61,14 +61,12 @@
 
 
 .verkaufer {
-    position: absolute;
-    top: 0px;
+    /* top: 0px; */
     right: 0px;
     width: 300px;
     padding-top: 10px;
-    padding-right: 10px;
+    padding-right: 20px;
     color: #5e5e5e;
-    z-index: 100;
     text-align: right;
     height: 100vh;
     overflow-y: scroll;
@@ -76,7 +74,11 @@
     user-select: none;
 }
 
-.verkaufer .header {
+.verkaufer .items {
+    justify-content: flex-end
+}
+
+/* .verkaufer .header {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -105,7 +107,7 @@
     margin-right: 0.5rem;
     margin-top: 0.2rem;
     cursor: pointer;
-}
+} */
 
 
 .verkaufer .list {
