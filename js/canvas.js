@@ -172,6 +172,7 @@ function Canvas() {
 
   canvas.initGroupLayout = function () {
     var groupKey = state.mode.groupKey
+    console.log("initGroupLayout", groupKey);
     canvasDomain = d3
       .nest()
       .key(function (d) {
@@ -184,6 +185,13 @@ function Canvas() {
       .map(function (d) {
         return d.key;
       });
+
+    if (groupKey == "stadt") {
+      console.log(canvasDomain)
+      const missing = canvasDomain.filter(d => !utils.citiesOrder.includes(d))
+      console.log(missing)
+      canvasDomain = utils.citiesOrder
+    }
 
     timeDomain = canvasDomain.map(function (d) {
       return {

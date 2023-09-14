@@ -164,3 +164,62 @@ utils.simulateLargeDatasets = function (data) {
 	Array.prototype.push.apply(data, _.clone(data, true).slice(0, 1036))
 }
 
+
+utils.citiesOrder = [
+	// France
+	"Genf",
+	"Lausanne",
+	"Monaco",
+	"Nizza",
+	"Paris",
+	"St Germain en Laye/London",
+	"Clarens",
+	"Paris/ZH",
+
+	// Germany
+	"Düsseldorf",
+	"Köln",
+	"München",
+	"Magdeburg",
+	"Konstanz/München",
+	"Stuttgart",
+	"Bonn",
+
+	// Liechtenstein
+	"Vaduz",
+
+	// Switzerland
+	"Basel",
+	"Ascona",
+	"Luzern",
+	"Winterthur",
+	"Zürich",
+	"St. Gallen",
+
+	// United Kingdom
+	"Cambridge",
+	"London",
+	"London/ZH",
+
+	// USA
+	"New York",
+
+	// Egypt
+	"Kairo",
+
+	// Italy
+	"Milano",
+	"Venedig",
+
+	// Norway
+	"Oslo",
+
+	// Canada
+	"Sorel Moussel",
+
+	// Unknown
+	"??",
+	""
+];
+
+
