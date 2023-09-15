@@ -8,6 +8,7 @@
     z-index: 100;
 }
 
+
 .filter.hide {
     opacity: 0;
     pointer-events: none;
@@ -47,6 +48,11 @@
     /* color: #333333; */
 }
 
+.topfilter .items>div.hide {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
 .besitz {
     left: 20px;
 }
@@ -55,7 +61,7 @@
     left: 400px;
 }
 
-.epoche {
+.alteanonymemoderne {
     left: 780px;
 }
 
