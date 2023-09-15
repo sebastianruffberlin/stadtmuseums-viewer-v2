@@ -58,7 +58,7 @@
     left: 20px;
 }
 
-.raubkunst {
+.whrung {
     left: 400px;
 }
 
@@ -67,7 +67,7 @@
 }
 
 
-.verkaufer {
+.vorbesitzerin {
     /* top: 0px; */
     right: 0px;
     width: 300px;
@@ -81,9 +81,29 @@
     user-select: none;
 }
 
-.verkaufer .items {
-    justify-content: flex-end
+
+.vorbesitzerin .items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
 }
+
+.vorbesitzerin .item {
+    cursor: pointer;
+    display: inline-flex;
+    padding: 3px;
+    line-height: 1;
+}
+
+.vorbesitzerin .item.active {
+    background-color: #939393;
+    color: #fff;
+}
+
+/* .verkaufer .items {
+    justify-content: flex-end
+} */
 
 /* .verkaufer .header {
     display: flex;
@@ -115,23 +135,3 @@
     margin-top: 0.2rem;
     cursor: pointer;
 } */
-
-
-.verkaufer .list {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-
-}
-
-.verkaufer .item {
-    cursor: pointer;
-    display: inline-flex;
-    padding: 3px;
-    line-height: 1;
-}
-
-.verkaufer .item.active {
-    background-color: #939393;
-    color: #fff;
-}

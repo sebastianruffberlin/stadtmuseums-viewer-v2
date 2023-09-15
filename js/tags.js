@@ -4,7 +4,7 @@ function Tags() {
 
   var fontsize = d3.scale.linear().range([11, 23])
 
-  var filter = { vorbesitzerin: [], alteanonymemoderne: [] };
+  var filter = { vorbesitzerin: [], alteanonymemoderne: [], stiftungfamilieanderes: [], whrung: [] };
   var lock = false
 
   function addOrRemove(array, value) {
@@ -20,37 +20,74 @@ function Tags() {
 
   function tags() { }
 
+  tags.updateDom = function updateDom(key, filteredData) {
+
+    var container = d3.select("." + key + " .items");
+    var selection = container
+      .selectAll(".item")
+      .data(filteredData, function (d) { return d.key; });
+
+    selection
+      .enter()
+      .append("div")
+      .classed("item", true)
+      .text(function (d) {
+        return d.key;
+      })
+      .on("click", function (d) {
+        lock = true;
+        filter[key] = addOrRemove(filter[key], d.key);
+        tags.filter();
+        tags.update();
+        lock = false;
+      });
+
+    selection.exit()
+      .classed("active", false)
+      .classed("hide", true)
+
+    selection
+      .classed("active", function (d) {
+        return filter[key].indexOf(d.key) > -1;
+      })
+      .classed("hide", false)
+  }
+
   tags.updateFilters = function updateFilters() {
 
     var filters = Object.entries(filter) //.filter(function (d) { return d[1].length; })
 
-    filters.forEach(function (filter) {
+    // console.log("updateFilters", filters)
+
+    for (var a = 0; a < filters.length; a++) {
+      var filterCur = filters[a];
       var index = {}
-      var otherFilter = filters.filter(function (d) { return d != filter; })
-      console.log(filter, "otherFilter", otherFilter)
+      var otherFilter = filters.filter(function (d) { return d != filterCur; })
+      // console.log(filter, "otherFilter", otherFilter)
       for (var i = 0; i < data.length; i++) {
         var d = data[i];
         var hit = otherFilter.filter(function (otherFilter) {
           return otherFilter[1].length === 0 || otherFilter[1].indexOf(d[otherFilter[0]]) > -1;
         })
-        // console.log(hit)
 
         if (hit.length == otherFilter.length) {
-          index[d[filter[0]]] = ++index[d[filter[0]]] || 0;
+          index[d[filterCur[0]]] = ++index[d[filterCur[0]]] || 0;
         }
       }
       var filteredData = Object.keys(index)
         .map(function (d) { return { key: d, size: index[d] }; })
         .sort(function (a, b) { return b.size - a.size; })
 
-      console.log(index, filteredData)
-    })
-    // var container = d3.select("." + f.key + " .items");
+      // console.log("done", filterCur[0], filteredData)
+
+      tags.updateDom(filterCur[0], filteredData)
+
+    }
   }
 
   tags.updateFilter = function updateFilter() {
 
-    tags.updateFilters();
+    // tags.updateFilters();
 
     // var filteredData = data.filter(function (d) { return d.active; });
     // var alteanonymemoderneData = d3.nest()
@@ -176,7 +213,7 @@ function Tags() {
     // console.log("init tags", _data, config)
     data = _data;
 
-    tags.updateFilter()
+    tags.updateFilters()
 
 
     // container.select("#kauferemi")
@@ -190,7 +227,7 @@ function Tags() {
 
   tags.update = function () {
 
-    tags.updateFilter();
+    tags.updateFilters();
   }
 
   tags.filter = function (highlight) {
