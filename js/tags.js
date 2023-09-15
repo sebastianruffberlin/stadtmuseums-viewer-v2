@@ -4,7 +4,7 @@ function Tags() {
 
   var fontsize = d3.scale.linear().range([11, 23])
 
-  var filter = { emigrationverfolgung: [], vorbesitzerin: [], alteanonymemoderne: [] };
+  var filter = { vorbesitzerin: [], alteanonymemoderne: [] };
   var lock = false
 
   function addOrRemove(array, value) {
@@ -20,7 +20,37 @@ function Tags() {
 
   function tags() { }
 
+  tags.updateFilters = function updateFilters() {
+
+    var filters = Object.entries(filter) //.filter(function (d) { return d[1].length; })
+
+    filters.forEach(function (f) {
+      var index = {}
+      var otherFilter = filters.filter(function (d) { return d != f; })
+      console.log(f, "otherFilter", otherFilter)
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i];
+        var hit = otherFilter.filter(function (f) {
+          return f[1].indexOf(d[f[0]]) > -1;
+        })
+        // console.log(hit)
+
+        if (hit.length == otherFilter.length || f[1].length == 0 || otherFilter.length == 0) {
+          index[d[f[0]]] = ++index[d[f[0]]] || 0;
+        }
+      }
+      var filteredData = Object.keys(index)
+        .map(function (d) { return { key: d, size: index[d] }; })
+        .sort(function (a, b) { return b.size - a.size; })
+
+      console.log(index, filteredData)
+    })
+    // var container = d3.select("." + f.key + " .items");
+  }
+
   tags.updateFilter = function updateFilter() {
+
+    tags.updateFilters();
 
     // var filteredData = data.filter(function (d) { return d.active; });
     // var alteanonymemoderneData = d3.nest()
@@ -32,10 +62,10 @@ function Tags() {
       var d = data[i];
       var hasVorbesitzerin = filter.vorbesitzerin.length ? filter.vorbesitzerin.indexOf(d.vorbesitzerin) > -1 : true;
       if (hasVorbesitzerin) {
-        alteanonymemoderneIndex[d.alteanonymemoderne] = true;
+        alteanonymemoderneIndex[d.alteanonymemoderne] = ++alteanonymemoderneIndex[d.alteanonymemoderne] || 0;
       }
     }
-    var alteanonymemoderneData = Object.keys(alteanonymemoderneIndex).map(function (d) { return { key: d }; })
+    var alteanonymemoderneData = Object.keys(alteanonymemoderneIndex).map(function (d) { return { key: d, size: alteanonymemoderneIndex[d] }; })
 
     // filter.alteanonymemoderne = filter.alteanonymemoderne.filter(function (d) { return alteanonymemoderneIndex[d]; })
 
