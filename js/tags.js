@@ -24,19 +24,19 @@ function Tags() {
 
     var filters = Object.entries(filter) //.filter(function (d) { return d[1].length; })
 
-    filters.forEach(function (f) {
+    filters.forEach(function (filter) {
       var index = {}
-      var otherFilter = filters.filter(function (d) { return d != f; })
-      console.log(f, "otherFilter", otherFilter)
+      var otherFilter = filters.filter(function (d) { return d != filter; })
+      console.log(filter, "otherFilter", otherFilter)
       for (var i = 0; i < data.length; i++) {
         var d = data[i];
-        var hit = otherFilter.filter(function (f) {
-          return f[1].indexOf(d[f[0]]) > -1;
+        var hit = otherFilter.filter(function (otherFilter) {
+          return otherFilter[1].length === 0 || otherFilter[1].indexOf(d[otherFilter[0]]) > -1;
         })
         // console.log(hit)
 
-        if (hit.length == otherFilter.length || f[1].length == 0 || otherFilter.length == 0) {
-          index[d[f[0]]] = ++index[d[f[0]]] || 0;
+        if (hit.length == otherFilter.length) {
+          index[d[filter[0]]] = ++index[d[filter[0]]] || 0;
         }
       }
       var filteredData = Object.keys(index)
