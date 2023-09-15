@@ -21,11 +21,25 @@ function Tags() {
   function tags() { }
 
   tags.updateFilter = function updateFilter() {
-    alteanonymemoderneData = d3.nest()
-      .key(function (d) { return d.alteanonymemoderne; })
-      .entries(data.filter(function (d) { return d.active; }));
 
-    alteanonymemoderneContainer = d3.select(".alteanonymemoderne .items");
+    // var filteredData = data.filter(function (d) { return d.active; });
+    // var alteanonymemoderneData = d3.nest()
+    //   .key(function (d) { return d.alteanonymemoderne; })
+    //   .entries(filteredData)
+
+    var alteanonymemoderneIndex = {}
+    for (var i = 0; i < data.length; i++) {
+      var d = data[i];
+      var hasVorbesitzerin = filter.vorbesitzerin.length ? filter.vorbesitzerin.indexOf(d.vorbesitzerin) > -1 : true;
+      if (hasVorbesitzerin) {
+        alteanonymemoderneIndex[d.alteanonymemoderne] = true;
+      }
+    }
+    var alteanonymemoderneData = Object.keys(alteanonymemoderneIndex).map(function (d) { return { key: d }; })
+
+    // filter.alteanonymemoderne = filter.alteanonymemoderne.filter(function (d) { return alteanonymemoderneIndex[d]; })
+
+    var alteanonymemoderneContainer = d3.select(".alteanonymemoderne .items");
     var selection = alteanonymemoderneContainer
       .selectAll(".item")
       .data(alteanonymemoderneData, function (d) { return d.key; });
@@ -49,30 +63,42 @@ function Tags() {
       .classed("active", false)
       .classed("hide", true)
 
-    selection.classed("active", function (d) {
-      return filter.alteanonymemoderne.indexOf(d.key) > -1;
-    }).classed("hide", false)
-  }
+    selection
+      .classed("active", function (d) {
+        return filter.alteanonymemoderne.indexOf(d.key) > -1;
+      })
+      .classed("hide", false)
 
-  tags.init = function (_data, config) {
-    // console.log("init tags", _data, config)
-    data = _data;
 
-    tags.updateFilter()
+    // var vorbesitzerinData = d3.nest()
+    //   .key(function (d) { return d.vorbesitzerin; })
+    //   .entries(data)
+    //   .sort(function (a, b) {
+    //     return b.values.length - a.values.length;
+    //   })
 
-    vorbesitzerinData = d3.nest()
-      .key(function (d) { return d.vorbesitzerin; })
-      .entries(data)
+    var vorbesitzerinIndex = {}
+    for (var i = 0; i < data.length; i++) {
+      var d = data[i];
+      var hasAlteanonymemoderne = filter.alteanonymemoderne.length ? filter.alteanonymemoderne.indexOf(d.alteanonymemoderne) > -1 : true;
+      if (hasAlteanonymemoderne) {
+        vorbesitzerinIndex[d.vorbesitzerin] = ++vorbesitzerinIndex[d.vorbesitzerin] || 0;
+      }
+    }
+    var vorbesitzerinData = Object.entries(vorbesitzerinIndex)
+      .map(function (d) { return { key: d[0], size: d[1] }; })
       .sort(function (a, b) {
-        return b.values.length - a.values.length;
+        return b.size - a.size;
       })
 
-    fontsize.domain(d3.extent(vorbesitzerinData, function (d) { return d.values.length; }))
+    fontsize.domain(d3.extent(vorbesitzerinData, function (d) { return d.size; }))
 
-    containerVorbesitzerin = d3.select(".verkaufer .list");
-    containerVorbesitzerin
+    var containerVorbesitzerin = d3.select(".verkaufer .list");
+    selection = containerVorbesitzerin
       .selectAll(".item")
       .data(vorbesitzerinData, function (d) { return d.key; })
+
+    selection
       .enter()
       .append("div")
       .classed("item", true)
@@ -80,7 +106,7 @@ function Tags() {
         return d.key// + " " + d.values.length + "";
       })
       .style("font-size", function (d) {
-        return fontsize(d.values.length) + "px";
+        return fontsize(d.size) + "px";
       })
       .on("click", function (d) {
         lock = true;
@@ -89,16 +115,39 @@ function Tags() {
         tags.update();
         lock = false;
       })
-      .on("mouseenter", function (d) {
-        if (lock) return;
-        filtercopy = Object.assign({}, filter);
-        filtercopy.vorbesitzerin = addOrRemove(filter.vorbesitzerin, d.key)
-        tags.filter(filtercopy);
+    // .on("mouseenter", function (d) {
+    //   if (lock) return;
+    //   filtercopy = Object.assign({}, filter);
+    //   filtercopy.vorbesitzerin = addOrRemove(filter.vorbesitzerin, d.key)
+    //   tags.filter(filtercopy);
+    // })
+    // .on("mouseleave", function (d) {
+    //   if (lock) return;
+    //   tags.filter();
+    // })
+
+    selection.exit()
+      .classed("active", false)
+      .classed("hide", true)
+
+
+    selection
+      .classed("active", function (d) {
+        return filter.vorbesitzerin.indexOf(d.key) > -1;
       })
-      .on("mouseleave", function (d) {
-        if (lock) return;
-        tags.filter();
-      })
+      .classed("hide", false)
+    // .style("font-size", function (d) {
+    //   return fontsize(d.size) + "px";
+    // })
+
+  }
+
+  tags.init = function (_data, config) {
+    // console.log("init tags", _data, config)
+    data = _data;
+
+    tags.updateFilter()
+
 
     // container.select("#kauferemi")
     //   .on("change", function () {
@@ -110,11 +159,6 @@ function Tags() {
 
 
   tags.update = function () {
-    containerVorbesitzerin
-      .selectAll(".item")
-      .classed("active", function (d) {
-        return filter.vorbesitzerin.indexOf(d.key) > -1;
-      })
 
     tags.updateFilter();
   }
