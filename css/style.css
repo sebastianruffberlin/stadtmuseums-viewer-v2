@@ -707,10 +707,14 @@ svg {
   display: block;
 }
 
+.detail span {
+  margin-right: 0.3em;
+}
+
 .detail .slidebutton {
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  left: 18px;
+  left: 10px;
   width: 20px;
   height: 30px;
   position: absolute;
@@ -728,7 +732,7 @@ svg {
 
 
 .detail.sneak {
-  right: -460px;
+  right: -480px;
 }
 
 .detail.sneak .slidebutton {
@@ -770,7 +774,7 @@ svg {
   /*height: 100%;
   overflow-y: scroll;*/
   float: left;
-  padding: 60px;
+  padding: 40px;
   /* padding-left: 60px; */
 }
 
@@ -802,7 +806,7 @@ svg {
 }
 
 .detail .entry.column .label {
-  width: 130px;
+  width: 160px;
   padding-right: 10px;
   flex: none;
   text-align: right;
@@ -822,7 +826,7 @@ svg {
 }
 
 .detail .entry .content p {
-  margin: 0;
+  /* margin: 0; */
 }
 
 .detail .entry .content .keyword {

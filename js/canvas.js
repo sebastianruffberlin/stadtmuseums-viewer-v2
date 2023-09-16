@@ -605,9 +605,14 @@ function Canvas() {
 
     // needs to be done better
     var detailData = {};
-    for (field in selectedImage) {
-      if (field[0] === "_") detailData[field] = selectedImage[field];
-    }
+    // for (field in selectedImage) {
+    //   if (field[0] === "_") detailData[field] = selectedImage[field];
+    // }
+    config.detail.structure.forEach(function (field) {
+      detailData[field.source] = selectedImage[field.source];
+    })
+
+    console.log("showDetail", detailData)
     detailData["_id"] = selectedImage.id;
     detailData["_keywords"] = selectedImage.keywords;
     detailData["_year"] = selectedImage.year;
