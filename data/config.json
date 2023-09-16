@@ -71,6 +71,157 @@
     "columns": 3
   },
   "detail": {
-    "structure": []
+    "structure": [
+      {
+        "name": "id",
+        "source": "id",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Jahr",
+        "source": "year",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "gloornr",
+        "source": "gloornr",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "knstlerin",
+        "source": "knstlerin",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "titelgloorleimgruber",
+        "source": "titelgloorleimgruber",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "katnr",
+        "source": "katnr",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "vorbesitzerin",
+        "source": "vorbesitzerin",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "stiftungfamilieanderes",
+        "source": "stiftungfamilieanderes",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "periode",
+        "source": "periode",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "kaufpreis",
+        "source": "kaufpreis",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "kaufpreischf",
+        "source": "kaufpreischf",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "alteanonymemoderne",
+        "source": "alteanonymemoderne",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "stadt",
+        "source": "stadt",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "emigrationverfolgung",
+        "source": "emigrationverfolgung",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "NS Raubkunst",
+        "source": "nsraubkunstusachfr",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "faelschung",
+        "source": "faelschung",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "invnrkhz",
+        "source": "invnrkhz",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "entstehungsjahr",
+        "source": "entstehungsjahr",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "technik",
+        "source": "technik",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Masse",
+        "source": "masse",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Signatur",
+        "source": "bezeichnung",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "werkkatalog",
+        "source": "werkkatalog",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "provenienz",
+        "source": "provenienz",
+        "display": "wide",
+        "type": "html"
+      },
+      {
+        "name": "ausstellungen",
+        "source": "ausstellungen",
+        "display": "wide",
+        "type": "html"
+      },
+      {
+        "name": "literatur",
+        "source": "literatur",
+        "display": "wide",
+        "type": "html"
+      }
+    ]
   }
 }
