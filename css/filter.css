@@ -62,6 +62,10 @@
     pointer-events: none;
 }
 
+.topfilter .merge {
+    display: flex;
+}
+
 
 .besitzOuter {
     left: 20px;
