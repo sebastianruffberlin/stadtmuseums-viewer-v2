@@ -590,7 +590,7 @@ function Canvas() {
         zoomedToImage = true;
         selectedImage = d;
         hideTheRest(d);
-        showDetail(d);
+        //showDetail(d);
         loadBigImage(d, "click");
         state.zoomingToImage = false;
       });
@@ -598,28 +598,40 @@ function Canvas() {
 
   function showDetail(d) {
     // console.log("show detail", d)
+    // console.log(detailVue, detailVue._data.item)
 
     detailContainer.select(".outer").node().scrollTop = 0;
 
     detailContainer.classed("hide", false).classed("sneak", utils.isMobile());
 
     // needs to be done better
-    var detailData = {};
     // for (field in selectedImage) {
     //   if (field[0] === "_") detailData[field] = selectedImage[field];
     // }
-    config.detail.structure.forEach(function (field) {
-      detailData[field.source] = selectedImage[field.source];
-    })
 
-    console.log("showDetail", detailData)
+    var detailData = {};
+    // var activeFields = config.detail.structure
+    //   .filter(function (field, index) {
+    //     return selectedImage[field.source] && selectedImage[field.source] !== "";
+    //   })
+    // console.log("activeFields", activeFields)
+    config.detail.structure.forEach(function (field) {
+      var val = selectedImage[field.source];
+      if (val && val !== "") detailData[field.source] = val;
+      else detailData[field.source] = "0";
+      // detailData[field.source] = selectedImage[field.source];
+    })
+    // console.log("showDetail", detailData)
+
+    detailVue._data.structure = activeFields;
+
     detailData["_id"] = selectedImage.id;
-    detailData["_keywords"] = selectedImage.keywords;
+    detailData["_keywords"] = selectedImage.keywords || "None";
     detailData["_year"] = selectedImage.year;
     detailData["_imagenum"] = selectedImage.imagenum || 1;
-    detailVue._data.item = detailData;
-    detailVue._data.id = d.id;
-    detailVue._data.page = d.page;
+    detailVue.id = d.id;
+    detailVue.page = d.page;
+    detailVue.item = detailData;
   }
 
   canvas.changePage = function (id, page) {

@@ -101,17 +101,8 @@ cpietsch@gmail.com
       <div class="outer">
         <div id="detail" class="inner">
           <div class="entries" v-if="item">
-            <div v-if="item._imagenum > 1" class="entry wide pages">
-              <div class="label">Seite</div>
-              <div class="content">
-                <span v-for="i in parseInt(item._imagenum)" v-bind:key="i" v-on:click="displayPage(i-1)"
-                  v-bind:class="{ active: i === page+1, keyword: true }">
-                  {{ i }}
-                </span>
-              </div>
-            </div>
-            <div v-for="entry in structure" v-bind:key="entry.name" v-bind:class="entry.display" class="entry"
-              v-if="hasData(entry)">
+
+            <div v-for="entry in structure" v-bind:class="entry.display" class="entry" v-if="hasData(entry)">
               <div v-if="entry.name" class="label">{{ entry.name }}</div>
               <div class="content">
                 <span v-if="entry.type === 'keywords'">
@@ -171,37 +162,37 @@ cpietsch@gmail.com
     </div> -->
 
     <div class="filter">
-      <div class="topfilter stiftungfamilieanderes">
+      <div class="topfilter stiftungfamilieanderesOuter">
         <div class="title">Besitz</div>
-        <div class="items">
+        <div class="items stiftungfamilieanderes">
         </div>
       </div>
 
-      <div class="topfilter raubkunst">
+      <div class="topfilter raubkunstOuter">
         <div class="title">Verkäufe außerhalb NS-Machtbereich</div>
-        <div class="items">
+        <div class="items raubkunst">
         </div>
       </div>
 
-      <div class="topfilter alteanonymemoderne">
+      <div class="topfilter alteanonymemoderneOuter">
         <div class="title">Epoche</div>
-        <div class="items">
+        <div class="items alteanonymemoderne">
 
         </div>
       </div>
 
-      <div class="topfilter emi">
-        <div class="items"></div>
+      <div class="topfilter emiOuter">
+        <div class="items emi"></div>
       </div>
 
-      <div class="topfilter falsch">
-        <div class="items"></div>
+      <div class="topfilter falschOuter">
+        <div class="items emi"></div>
       </div>
 
 
 
     </div>
-    <div class="topfilter vorbesitzerin">
+    <div class="topfilter vorbesitzerinOuter">
       <div class="title">Verkäufer</div>
       <!-- <div class="items">
           <div class="">
@@ -209,7 +200,7 @@ cpietsch@gmail.com
           </div>
 
         </div> -->
-      <div class="items">
+      <div class="items vorbesitzerin">
       </div>
     </div>
 
