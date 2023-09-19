@@ -73,6 +73,12 @@
   "detail": {
     "structure": [
       {
+        "name": "Sammlung Online",
+        "source": "kid",
+        "display": "column",
+        "type": "link"
+      },
+      {
         "name": "Titel",
         "source": "titeloriginalgloorstiftung",
         "display": "column",

@@ -590,7 +590,7 @@ function Canvas() {
         zoomedToImage = true;
         selectedImage = d;
         hideTheRest(d);
-        //showDetail(d);
+        showDetail(d);
         loadBigImage(d, "click");
         state.zoomingToImage = false;
       });
@@ -615,6 +615,7 @@ function Canvas() {
     //     return selectedImage[field.source] && selectedImage[field.source] !== "";
     //   })
     // console.log("activeFields", activeFields)
+
     config.detail.structure.forEach(function (field) {
       var val = selectedImage[field.source];
       if (val && val !== "") detailData[field.source] = val;
@@ -623,7 +624,7 @@ function Canvas() {
     })
     // console.log("showDetail", detailData)
 
-    detailVue._data.structure = activeFields;
+    // detailVue._data.structure = activeFields;
 
     detailData["_id"] = selectedImage.id;
     detailData["_keywords"] = selectedImage.keywords || "None";

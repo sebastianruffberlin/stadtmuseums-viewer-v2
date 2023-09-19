@@ -11,7 +11,7 @@ var detailVue = new Vue({
       canvas.changePage(this.id, page)
     },
     hasData: function (entry) {
-      return this.item.hasOwnProperty(entry.source) && this.getContent(entry) !== undefined && this.getContent(entry) !== null && this.getContent(entry) !== '' && this.getContent(entry) !== 'NaN'
+      return this.item.hasOwnProperty(entry.source) && this.item[entry.source] != 0 && this.getContent(entry) !== undefined && this.getContent(entry) !== null && this.getContent(entry) !== '' && this.getContent(entry) !== 'NaN'
     },
     getContent: function (entry) {
       if (entry.type === 'text') {
@@ -24,6 +24,9 @@ var detailVue = new Vue({
         return this.item[entry.source].join(', ')
       }
       if (entry.type === 'html') {
+        return this.item[entry.source]
+      }
+      if (entry.type === 'link') {
         return this.item[entry.source]
       }
       if (entry.type === 'markdown') {
