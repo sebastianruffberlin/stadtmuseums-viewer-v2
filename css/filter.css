@@ -59,11 +59,17 @@
 }
 
 .raubkunst {
-    left: 400px;
+    left: 300px;
 }
 
 .alteanonymemoderne {
-    left: 780px;
+    left: 620px;
+}
+
+.emi {
+    top: 43px;
+    left: 1000px;
+    position: absolute;
 }
 
 

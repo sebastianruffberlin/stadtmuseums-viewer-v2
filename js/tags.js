@@ -1,11 +1,10 @@
 function Tags() {
 
-  var containerVorbesitzerin;
-
   var fontsize = d3.scale.linear().range([11, 23])
 
-  var filter = { vorbesitzerin: [], alteanonymemoderne: [], stiftungfamilieanderes: [], raubkunst: [] };
-  var lock = false
+  var filter = { vorbesitzerin: [], alteanonymemoderne: [], stiftungfamilieanderes: [], raubkunst: [], emi: [] };
+  var lock = false;
+  var data;
 
   function addOrRemove(array, value) {
     array = array.slice();
@@ -77,6 +76,7 @@ function Tags() {
       var filteredData = Object.keys(index)
         .map(function (d) { return { key: d, size: index[d] }; })
         .sort(function (a, b) { return b.size - a.size; })
+        .filter(function (d) { return d.key != "" && d.key != "undefined"; });
 
       // console.log("done", filterCur[0], filteredData)
 
@@ -85,143 +85,12 @@ function Tags() {
     }
   }
 
-  tags.updateFilter = function updateFilter() {
-
-    // tags.updateFilters();
-
-    // var filteredData = data.filter(function (d) { return d.active; });
-    // var alteanonymemoderneData = d3.nest()
-    //   .key(function (d) { return d.alteanonymemoderne; })
-    //   .entries(filteredData)
-
-    var alteanonymemoderneIndex = {}
-    for (var i = 0; i < data.length; i++) {
-      var d = data[i];
-      var hasVorbesitzerin = filter.vorbesitzerin.length ? filter.vorbesitzerin.indexOf(d.vorbesitzerin) > -1 : true;
-      if (hasVorbesitzerin) {
-        alteanonymemoderneIndex[d.alteanonymemoderne] = ++alteanonymemoderneIndex[d.alteanonymemoderne] || 0;
-      }
-    }
-    var alteanonymemoderneData = Object.keys(alteanonymemoderneIndex).map(function (d) { return { key: d, size: alteanonymemoderneIndex[d] }; })
-
-    // filter.alteanonymemoderne = filter.alteanonymemoderne.filter(function (d) { return alteanonymemoderneIndex[d]; })
-
-    var alteanonymemoderneContainer = d3.select(".alteanonymemoderne .items");
-    var selection = alteanonymemoderneContainer
-      .selectAll(".item")
-      .data(alteanonymemoderneData, function (d) { return d.key; });
-
-    selection
-      .enter()
-      .append("div")
-      .classed("item", true)
-      .text(function (d) {
-        return d.key;
-      })
-      .on("click", function (d) {
-        lock = true;
-        filter.alteanonymemoderne = addOrRemove(filter.alteanonymemoderne, d.key);
-        tags.filter();
-        tags.update();
-        lock = false;
-      });
-
-    selection.exit()
-      .classed("active", false)
-      .classed("hide", true)
-
-    selection
-      .classed("active", function (d) {
-        return filter.alteanonymemoderne.indexOf(d.key) > -1;
-      })
-      .classed("hide", false)
-
-
-    // var vorbesitzerinData = d3.nest()
-    //   .key(function (d) { return d.vorbesitzerin; })
-    //   .entries(data)
-    //   .sort(function (a, b) {
-    //     return b.values.length - a.values.length;
-    //   })
-
-    var vorbesitzerinIndex = {}
-    for (var i = 0; i < data.length; i++) {
-      var d = data[i];
-      var hasAlteanonymemoderne = filter.alteanonymemoderne.length ? filter.alteanonymemoderne.indexOf(d.alteanonymemoderne) > -1 : true;
-      if (hasAlteanonymemoderne) {
-        vorbesitzerinIndex[d.vorbesitzerin] = ++vorbesitzerinIndex[d.vorbesitzerin] || 0;
-      }
-    }
-    var vorbesitzerinData = Object.entries(vorbesitzerinIndex)
-      .map(function (d) { return { key: d[0], size: d[1] }; })
-      .sort(function (a, b) {
-        return b.size - a.size;
-      })
-
-    fontsize.domain(d3.extent(vorbesitzerinData, function (d) { return d.size; }))
-
-    var containerVorbesitzerin = d3.select(".verkaufer .list");
-    selection = containerVorbesitzerin
-      .selectAll(".item")
-      .data(vorbesitzerinData, function (d) { return d.key; })
-
-    selection
-      .enter()
-      .append("div")
-      .classed("item", true)
-      .text(function (d) {
-        return d.key// + " " + d.values.length + "";
-      })
-      .style("font-size", function (d) {
-        return fontsize(d.size) + "px";
-      })
-      .on("click", function (d) {
-        lock = true;
-        filter.vorbesitzerin = addOrRemove(filter.vorbesitzerin, d.key);
-        tags.filter();
-        tags.update();
-        lock = false;
-      })
-    // .on("mouseenter", function (d) {
-    //   if (lock) return;
-    //   filtercopy = Object.assign({}, filter);
-    //   filtercopy.vorbesitzerin = addOrRemove(filter.vorbesitzerin, d.key)
-    //   tags.filter(filtercopy);
-    // })
-    // .on("mouseleave", function (d) {
-    //   if (lock) return;
-    //   tags.filter();
-    // })
-
-    selection.exit()
-      .classed("active", false)
-      .classed("hide", true)
-
-
-    selection
-      .classed("active", function (d) {
-        return filter.vorbesitzerin.indexOf(d.key) > -1;
-      })
-      .classed("hide", false)
-    // .style("font-size", function (d) {
-    //   return fontsize(d.size) + "px";
-    // })
-
-  }
 
   tags.init = function (_data, config) {
     // console.log("init tags", _data, config)
     data = _data;
 
     tags.updateFilters()
-
-
-    // container.select("#kauferemi")
-    //   .on("change", function () {
-    //     var isChecked = d3.select(this).property("checked");
-    //     // filter.emigrationverfolgung = isChecked ? "JA" : false;
-    //     tags.filter();
-    //   })
   }
 
 
