@@ -22,6 +22,10 @@
     opacity: 0;
     pointer-events: none;
 }
+.vorbesitzerinOuter.hide {
+    opacity: 0;
+    pointer-events: none;
+}
 
 
 .topfilter {
@@ -105,6 +109,9 @@
     overflow-x: hidden;
     user-select: none;
     pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+    
 }
 
 
