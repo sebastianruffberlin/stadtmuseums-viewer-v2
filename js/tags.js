@@ -2,7 +2,7 @@ function Tags() {
 
   var fontsize = d3.scale.linear().range([11, 24])
 
-  var filter = { vorbesitzerin: [], alteanonymemoderne: [], stiftungfamilieanderes: [], raubkunst: [], emi: [] };
+  var filter = { vorbesitzerin: [], alteanonymemoderne: [], stiftungfamilieanderes: [], raubkunst: [], emi: [], faelschung: [] };
   var lock = false;
   var data;
 
