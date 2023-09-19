@@ -53,14 +53,17 @@ function Tags() {
       })
 
     selection.exit()
+      // .remove()
       .classed("active", false)
       .classed("hide", true)
       .filter(function (d) {
         return key === "vorbesitzerin"
       })
+      .remove()
       .style("font-size", function (d) {
         return "11px";
       })
+
 
     selection
       .classed("active", function (d) {
@@ -72,6 +75,9 @@ function Tags() {
       })
       .style("font-size", function (d) {
         return fontsize(d.size) + "px";
+      })
+      .sort(function (a, b) {
+        return b.size - a.size;
       })
   }
 
@@ -93,7 +99,7 @@ function Tags() {
         })
 
         if (hit.length == otherFilter.length) {
-          index[d[filterCur[0]]] = ++index[d[filterCur[0]]] || 0;
+          index[d[filterCur[0]]] = ++index[d[filterCur[0]]] || 1;
         }
       }
       var filteredData = Object.keys(index)
