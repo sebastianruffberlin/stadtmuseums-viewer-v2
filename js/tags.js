@@ -26,7 +26,7 @@ function Tags() {
       fontsize.domain(d3.extent(filteredData, function (d) { return d.size; }))
     }
 
-    var container = d3.select("." + key + " .items");
+    var container = d3.select("." + key);
     var selection = container
       .selectAll(".item")
       .data(filteredData, function (d) { return d.key; });

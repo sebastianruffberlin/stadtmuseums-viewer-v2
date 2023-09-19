@@ -11,7 +11,7 @@ var detailVue = new Vue({
       canvas.changePage(this.id, page)
     },
     hasData: function (entry) {
-      return this.getContent(entry) !== ''
+      return this.item.hasOwnProperty(entry.source) && this.getContent(entry) !== undefined && this.getContent(entry) !== null && this.getContent(entry) !== '' && this.getContent(entry) !== 'NaN'
     },
     getContent: function (entry) {
       if (entry.type === 'text') {
