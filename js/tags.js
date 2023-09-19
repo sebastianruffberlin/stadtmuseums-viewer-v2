@@ -1,6 +1,6 @@
 function Tags() {
 
-  var fontsize = d3.scale.linear().range([11, 23])
+  var fontsize = d3.scale.linear().range([11, 24])
 
   var filter = { vorbesitzerin: [], alteanonymemoderne: [], stiftungfamilieanderes: [], raubkunst: [], emi: [] };
   var lock = false;
@@ -21,6 +21,11 @@ function Tags() {
 
   tags.updateDom = function updateDom(key, filteredData) {
 
+    if (key === "vorbesitzerin") {
+      console.log("updateDom", key, filteredData)
+      fontsize.domain(d3.extent(filteredData, function (d) { return d.size; }))
+    }
+
     var container = d3.select("." + key + " .items");
     var selection = container
       .selectAll(".item")
@@ -39,17 +44,35 @@ function Tags() {
         tags.filter();
         tags.update();
         lock = false;
-      });
+      })
+      .filter(function (d) {
+        return key === "vorbesitzerin"
+      })
+      .style("font-size", function (d) {
+        return fontsize(d.size) + "px";
+      })
 
     selection.exit()
       .classed("active", false)
       .classed("hide", true)
+      .filter(function (d) {
+        return key === "vorbesitzerin"
+      })
+      .style("font-size", function (d) {
+        return "11px";
+      })
 
     selection
       .classed("active", function (d) {
         return filter[key].indexOf(d.key) > -1;
       })
       .classed("hide", false)
+      .filter(function (d) {
+        return key === "vorbesitzerin"
+      })
+      .style("font-size", function (d) {
+        return fontsize(d.size) + "px";
+      })
   }
 
   tags.updateFilters = function updateFilters() {
