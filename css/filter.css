@@ -1,3 +1,12 @@
+.sidebar .text-black-bold {
+    font-weight: 600;
+}
+
+.text-darkgrey-bold {
+    color: #7c7c7c;
+}
+
+
 .filter {
     transition: opacity 0.3s ease-in-out;
     opacity: 1;

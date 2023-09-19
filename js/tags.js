@@ -81,6 +81,10 @@ function Tags() {
       })
   }
 
+  tags.resize = function resize() {
+
+  }
+
   tags.updateFilters = function updateFilters() {
 
     var filters = Object.entries(filter) //.filter(function (d) { return d[1].length; })
