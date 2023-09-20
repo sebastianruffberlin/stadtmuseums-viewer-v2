@@ -22,6 +22,7 @@
     opacity: 0;
     pointer-events: none;
 }
+
 .vorbesitzerinOuter.hide {
     opacity: 0;
     pointer-events: none;
@@ -71,8 +72,8 @@
 }
 
 
-.besitzOuter {
-    left: 20px;
+.stiftungfamilieanderesOuter {
+    left: 25px;
 }
 
 .raubkunstOuter {
@@ -111,7 +112,7 @@
     pointer-events: none;
     transition: opacity 0.3s ease-in-out;
     opacity: 1;
-    
+
 }
 
 
