@@ -474,7 +474,7 @@ function Canvas() {
     return p2;
   }
 
-  var speed = 0.02;
+  var speed = 0.04;
 
   function imageAnimation() {
     var sleep = true;
