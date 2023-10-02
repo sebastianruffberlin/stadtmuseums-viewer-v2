@@ -1,6 +1,7 @@
-![VIKUS Viewer](https://vikusviewer.fh-potsdam.de/assets/teaser.png)
+- You can use https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer for VSCode to develop locally and have a live preview.
+ 
 
-# VIKUS Viewer
+# Bührle Viewer
 
 [VIKUS Viewer](https://vikusviewer.fh-potsdam.de/) is a web-based visualization system that arranges thousands of cultural artifacts on a dynamic canvas and supports the exploration of thematic and temporal patterns of large collections, while providing rapid access to high-resolution imagery.
 
