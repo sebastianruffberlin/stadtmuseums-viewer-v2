@@ -28,10 +28,10 @@
         "type": "csv",
         "url": "data/preis.csv",
         "timeline": true,
-        "scale": 0.8
+        "scale": 0.6
       },
       {
-        "title": "Similarity",
+        "title": "Ähnlichkeit",
         "type": "csv",
         "url": "data/projection.csv",
         "scale": 0.8
