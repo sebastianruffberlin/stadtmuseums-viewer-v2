@@ -53,18 +53,18 @@
     }
   },
   "style": {
-    "fontColor": "#333333",
+    "fontColor": "#0000ff",
     "fontColorActive": "#f0f0f0",
     "fontBackground": "#333333",
     "textShadow": "1px 1px 0px #f8f4e9",
-    "canvasBackground": "#f0f0f0",
+    "canvasBackground": "#ffffff",
     "timelineBackground": "#fff9eb",
     "timelineFontColor": "#000",
     "backgroundHeader": "#333333",
     "fontColorHeader": "#C6C6C6",
-    "detailBackground": "#EEE",
-    "infoBackground": "#333333",
-    "infoFontColor": "#f0f0f0",
+    "detailBackground": "#0000ff",
+    "infoBackground": "#0000ff",
+    "infoFontColor": "#ffffff",
     "searchbarBackground": "#DAA520"
   },
   "projection": {
