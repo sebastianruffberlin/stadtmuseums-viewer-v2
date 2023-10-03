@@ -6,6 +6,18 @@
   font-stretch: normal;
 }
 
+@font-face {
+  font-family: 'Sharpbook';
+  src: url("../font/SharpGroteskBook-25.woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+html {
+  font-size: 0.7em;
+}
+
 /* @font-face {
   font-family: 'Din';
   src: url("../font/Din/Din-Regular.ttf");
@@ -42,7 +54,7 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  font-family: 'Din', Helvetica, Arial, sans-serif;
+  font-family: 'Sharpbook', Helvetica, Arial, sans-serif;
   overflow: none;
   width: 100vw;
   height: 100vh;
@@ -262,7 +274,6 @@ canvas {
 
 .language-container div {
   text-transform: uppercase;
-  */;
   padding-left: 7px;
   float: left;
   padding-right: 6px;
@@ -408,7 +419,7 @@ svg {
 }
 
 .timeline .text {
-  font-family: 'Din', Helvetica, Arial, sans-serif;
+  font-family: 'Sharpbook', Helvetica, Arial, sans-serif;
   font-size: 0.8em;
   /* padding: 4px; */
   padding-top: 1em;
@@ -743,7 +754,7 @@ svg {
 }
 
 .detail {
-  font-size: 15px;
+  /* font-size: 15px; */
   z-index: 400;
   height: 100%;
   max-width: 100%;

@@ -1,6 +1,6 @@
 function Tags() {
 
-  var fontsize = d3.scale.linear().range([11, 24])
+  var fontsize = d3.scale.linear().range([8, 17])
 
   var filter = { vorbesitzerin: [], alteanonymemoderne: [], stiftungfamilieanderes: [], raubkunst: [], emi: [], falsch: [] };
   var lock = false;

@@ -115,7 +115,7 @@
 .navi .button {
     transition: all 0.3s;
     text-transform: uppercase;
-    font-size: 13px;
+    /* font-size: 13px; */
     z-index: 300;
     /* display: inline-block; */
     /* display: none; */
