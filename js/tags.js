@@ -5,6 +5,11 @@ function Tags() {
   var filter = { vorbesitzerin: [], alteanonymemoderne: [], stiftungfamilieanderes: [], raubkunst: [], emi: [], falsch: [] };
   var lock = false;
   var data;
+  var sortArrays = {
+    raubkunst: ["CH", "FR", "USA"],
+    stiftungfamilieanderes: ["Stiftung", "Privatbesitz", "anderes"],
+    alteanonymemoderne: ["Moderne", "Alte Meister", "Mittelalter"]
+  }
 
   function addOrRemove(array, value) {
     array = array.slice();
@@ -28,29 +33,15 @@ function Tags() {
 
     if(key === "raubkunst") {
       filteredData = filteredData.filter(function(d) { return d.key != "Raubkunst" })
-      var sorted = ["CH", "FR", "USA"]
-      filteredData.sort(function(a, b) { 
+    }
+
+    if(sortArrays[key]) {
+      var sorted = sortArrays[key]
+      filteredData.sort(function(a, b) {
         return sorted.indexOf(a.key) - sorted.indexOf(b.key)
       })
     }
-
-    if(key === "stiftungfamilieanderes") {
-      //Stiftung, Privatbesitz, anderes
-      var sorted = ["Stiftung", "Privatbesitz", "anderes"]
-      filteredData.sort(function(a, b) { 
-        return sorted.indexOf(a.key) - sorted.indexOf(b.key)
-      })
-    }
-
-    if(key === "alteanonymemoderne") {
-      //Moderne, Alter Meister, Mittelalter, Fälschung
-      var sorted = ["Moderne", "Alte Meister", "Mittelalter"]
-      filteredData.sort(function(a, b) { 
-        return sorted.indexOf(a.key) - sorted.indexOf(b.key)
-      })
-      console.log(filteredData)
-    }
-
+    
     var container = d3.select("." + key);
     var selection = container
       .selectAll(".item")
