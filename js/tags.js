@@ -6,7 +6,7 @@ function Tags() {
   var lock = false;
   var data;
   var sortArrays = {
-    raubkunst: ["CH", "FR", "USA"],
+    raubkunst: ["CH", "FR", "USA", "Raubkunst"],
     stiftungfamilieanderes: ["Stiftung", "Privatbesitz", "anderes"],
     alteanonymemoderne: ["Moderne", "Alte Meister", "Mittelalter"]
   }
@@ -32,7 +32,7 @@ function Tags() {
     }
 
     if(key === "raubkunst") {
-      filteredData = filteredData.filter(function(d) { return d.key != "Raubkunst" })
+      // filteredData = filteredData.filter(function(d) { return d.key != "Raubkunst" })
     }
 
     if(sortArrays[key]) {
@@ -41,7 +41,7 @@ function Tags() {
         return sorted.indexOf(a.key) - sorted.indexOf(b.key)
       })
     }
-    
+
     var container = d3.select("." + key);
     var selection = container
       .selectAll(".item")
@@ -51,6 +51,9 @@ function Tags() {
       .enter()
       .append("div")
       .classed("item", true)
+      .classed("spacer", function (d) {
+        return d.key === "Raubkunst";
+      })
       .text(function (d) {
         return d.key;
       })

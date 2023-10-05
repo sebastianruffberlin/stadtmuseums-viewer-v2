@@ -47,11 +47,12 @@
     gap: 5px;
 }
 
+
 .topfilter .items {
     display: flex;
 }
 
-.topfilter .items>div {
+.topfilter .items .item {
     padding: 6px;
     cursor: pointer;
     margin: 2px;
@@ -60,11 +61,15 @@
     border-radius: 1em;
 }
 
-.topfilter .items>div.active {
+.topfilter .items .item.active {
     background-color: #0000ff;
     color: #FFF;
     /* background-color: #DAA520; */
     /* color: #333333; */
+}
+
+.topfilter .items .spacer {
+    margin-left: 4em;
 }
 
 .topfilter div.hide {
@@ -82,11 +87,11 @@
 }
 
 .raubkunstOuter {
-    left: 280px;
+    left: 690px;
 }
 
 .alteanonymemoderneOuter {
-    left: 580px;
+    left: 290px;
 }
 
 .emiOuter {
