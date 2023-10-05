@@ -6,6 +6,9 @@
     color: #ffffff;
 }
 
+.vorbesitzerin>.item {
+    border: none!important;
+}
 
 .filter {
     transition: opacity 0.3s ease-in-out;
@@ -99,6 +102,7 @@
 }
 
 
+
 .vorbesitzerinOuter {
     /* top: 0px; */
     right: 0px;
@@ -136,3 +140,4 @@
     background-color: #939393;
     color: #fff;
 }
+

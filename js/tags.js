@@ -34,6 +34,23 @@ function Tags() {
       })
     }
 
+    if(key === "stiftungfamilieanderes") {
+      //Stiftung, Privatbesitz, anderes
+      var sorted = ["Stiftung", "Privatbesitz", "anderes"]
+      filteredData.sort(function(a, b) { 
+        return sorted.indexOf(a.key) - sorted.indexOf(b.key)
+      })
+    }
+
+    if(key === "alteanonymemoderne") {
+      //Moderne, Alter Meister, Mittelalter, Fälschung
+      var sorted = ["Moderne", "Alte Meister", "Mittelalter"]
+      filteredData.sort(function(a, b) { 
+        return sorted.indexOf(a.key) - sorted.indexOf(b.key)
+      })
+      console.log(filteredData)
+    }
+
     var container = d3.select("." + key);
     var selection = container
       .selectAll(".item")
