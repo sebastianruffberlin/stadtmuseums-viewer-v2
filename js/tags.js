@@ -31,8 +31,8 @@ function Tags() {
       fontsize.domain(d3.extent(filteredData, function (d) { return d.size; }))
     }
 
-    if(key === "raubkunst") {
-      // filteredData = filteredData.filter(function(d) { return d.key != "Raubkunst" })
+    if(key === "stiftungfamilieanderes") {
+      filteredData = filteredData.filter(function(d) { return d.key != "anderes" })
     }
 
     if(sortArrays[key]) {
@@ -52,6 +52,9 @@ function Tags() {
       .append("div")
       .classed("item", true)
       .classed("spacer", function (d) {
+        return d.key === "Fälschung";
+      })
+      .classed("raubkunst", function (d) {
         return d.key === "Raubkunst";
       })
       .text(function (d) {

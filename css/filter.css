@@ -32,6 +32,8 @@
 }
 
 
+
+
 .topfilter {
     top: 0px;
     position: absolute;
@@ -45,6 +47,10 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.topfilter .title {
+    margin-left: 5px;
 }
 
 
@@ -69,7 +75,12 @@
 }
 
 .topfilter .items .spacer {
-    margin-left: 4em;
+    margin-left: 2em;
+}
+
+.topfilter .items .raubkunst {
+    position: absolute;
+    top: 7em;
 }
 
 .topfilter div.hide {
@@ -87,7 +98,8 @@
 }
 
 .raubkunstOuter {
-    left: 690px;
+    top: 70px;
+    left: 5px;
 }
 
 .alteanonymemoderneOuter {

@@ -105,11 +105,10 @@
 
 .navi {
     z-index: 300;
-    top: 30%;
+    bottom: 15px;
     position: absolute;
-    left: 10px;
-    /* display: flex;
-    flex-direction: column; */
+    left: 40%;
+    display: flex;
 }
 
 .navi .button {
@@ -131,7 +130,7 @@
     cursor: pointer;
     /* font-weight: bold; */
     color: #0000ff;
-    margin-bottom: 5px;
+    margin-right: 5px;
 }
 
 .navi .button.active {
