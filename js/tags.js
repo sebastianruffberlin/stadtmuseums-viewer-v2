@@ -174,6 +174,8 @@ function Tags() {
     if (!highlight) canvas.project();
   }
 
+  tags.search = function(){}
+
 
   return tags;
 }
