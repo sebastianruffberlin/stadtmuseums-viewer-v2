@@ -18,6 +18,8 @@
     left: 0px;
     width: 100%;
     z-index: 100;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -37,8 +39,6 @@
 .topfilter {
     top: 0px;
     position: absolute;
-    display: flex;
-    justify-content:center;
     color: #0000ff;
     /* color: #C6C6C6; */
     z-index: 100;
@@ -105,7 +105,7 @@
 }
 
 .alteanonymemoderneOuter {
-    /* left: 290px; */
+    left: 290px;
 }
 
 .emiOuter {
