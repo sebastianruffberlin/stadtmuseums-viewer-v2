@@ -164,62 +164,27 @@ utils.simulateLargeDatasets = function (data) {
 	Array.prototype.push.apply(data, _.clone(data, true).slice(0, 1036))
 }
 
+utils.citiesUnordered = ['Magdeburg', 'Zürich', 'Genf', 'Luzern', 'St. Gallen', 'Paris', 'Basel', 'Winterthur', 'Lausanne', 'Monaco', 'London', 'Vaduz', 'Ascona', 'Clarens', 'New York', 'unbekannt', 'Sorel Moussel', 'München', 'Meersburg', 'Cambridge', 'Mailand', 'Köln', 'Oslo', 'Düsseldorf', 'Stuttgart', 'Bonn', 'Venedig', 'Altaussee', 'Madrid']
 
 utils.citiesOrder = [
 	// France
-	"Genf",
-	"Lausanne",
-	"Monaco",
-	"Nizza",
-	"Paris",
-	"St Germain en Laye/London",
-	"Clarens",
-	"Paris/ZH",
-
+	'Paris', 'Lausanne', 'Genf', 'Monaco', 'Clarens', 'Sorel Moussel',
 	// Germany
-	"Düsseldorf",
-	"Köln",
-	"München",
-	"Magdeburg",
-	"Konstanz/München",
-	"Stuttgart",
-	"Bonn",
-
-	// Liechtenstein
-	"Vaduz",
-
-	// Switzerland
-	"Basel",
-	"Ascona",
-	"Luzern",
-	"Winterthur",
-	"Zürich",
-	"St. Gallen",
-
-	// United Kingdom
-	"Cambridge",
-	"London",
-	"London/ZH",
-
-	// USA
-	"New York",
-
-	// Egypt
-	"Kairo",
-
+	'Magdeburg', 'München', 'Meersburg', 'Stuttgart', 'Bonn', 'Düsseldorf', 'Köln',
+	// Austria
+	'Altaussee',
 	// Italy
-	"Milano",
-	"Venedig",
-
+	'Venedig', 'Mailand',
+	// England
+	'London', 'Cambridge',
+	// Switzerland
+	'Zürich', 'Luzern', 'St. Gallen', 'Basel', 'Winterthur', 'Vaduz', 'Ascona',
+	// USA
+	'New York',
 	// Norway
-	"Oslo",
-
-	// Canada
-	"Sorel Moussel",
-
+	'Oslo',
+	// Spain
+	'Madrid',
 	// Unknown
-	"??",
-	""
-];
-
-
+	'unbekannt'
+]

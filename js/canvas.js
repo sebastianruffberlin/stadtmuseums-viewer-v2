@@ -187,9 +187,9 @@ function Canvas() {
       });
 
     if (groupKey == "stadt") {
-      console.log(canvasDomain)
+      console.log("stadt", canvasDomain)
       const missing = canvasDomain.filter(d => !utils.citiesOrder.includes(d))
-      console.log(missing)
+      console.log("missing", missing)
       canvasDomain = utils.citiesOrder
     }
 
