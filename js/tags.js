@@ -2,13 +2,13 @@ function Tags() {
 
   var fontsize = d3.scale.linear().range([8, 17])
 
-  var filter = { vorbesitzerin: [], alteanonymemoderne: [], stiftungfamilieanderes: [], raubkunst: [], emi: [], falsch: [] };
+  var filter = { vorbesitzerin: [], epoche: [], besitz: [], raubkunst: [], emi: [], falsch: [] };
   var lock = false;
   var data;
   var sortArrays = {
     raubkunst: ["CH", "FR", "USA", "Raubkunst"],
-    stiftungfamilieanderes: ["Stiftung", "Privatbesitz", "anderes"],
-    alteanonymemoderne: ["Moderne", "Alte Meister", "Mittelalter"]
+    besitz: ["Stiftung", "Privatbesitz", "anderes"],
+    epoche: ["Moderne", "Alte Meister", "Mittelalter"]
   }
 
   function addOrRemove(array, value) {
@@ -31,7 +31,7 @@ function Tags() {
       fontsize.domain(d3.extent(filteredData, function (d) { return d.size; }))
     }
 
-    if(key === "stiftungfamilieanderes") {
+    if(key === "besitz") {
       filteredData = filteredData.filter(function(d) { return d.key != "anderes" })
     }
 
