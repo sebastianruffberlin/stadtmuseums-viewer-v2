@@ -13,15 +13,15 @@
         "groupKey": "year"
       },
       {
-        "title": "Ort",
-        "type": "group",
-        "groupKey": "stadt"
-      },
-      {
         "title": "Kaufpreis",
         "type": "group",
         "groupKey": "year",
         "y": "kaufpreis"
+      },
+      {
+        "title": "Ort",
+        "type": "group",
+        "groupKey": "stadt"
       }
     ],
     "textures": {

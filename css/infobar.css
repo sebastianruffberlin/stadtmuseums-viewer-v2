@@ -136,7 +136,7 @@
 .navi .button.active {
     color: #ffffff;
     background: #0000ff;
-    padding-right: 10px;
+    /* padding-right: 10px; */
     /* border-right: 4px solid rgba(247, 239, 205, 0.18); */
 }
 
