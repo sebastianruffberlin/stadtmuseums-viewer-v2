@@ -7,7 +7,7 @@ function Tags() {
   var data;
   var sortArrays = {
     raubkunst: ["CH", "FR", "USA", "Raubkunst"],
-    besitz: ["Stiftung", "Privatbesitz", "anderes"],
+    besitz: ["Stiftung", "Privatbesitz", "Veräusserung", "Restitution", "anderes"],
     epoche: ["Moderne", "Alte Meister", "Mittelalter"]
   }
 

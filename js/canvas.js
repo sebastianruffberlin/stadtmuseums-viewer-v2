@@ -471,7 +471,7 @@ function Canvas() {
     // y scale for state.mode.y (e.g. "kaufpreis")
     var yscale = d3.scale.linear()
       .domain(d3.extent(data, function (d) { return +d[state.mode.y]; }))
-      .range([15, height*0.7]);
+      .range([2* (rangeBand / collumns), height*0.7]);
 
     // console.log("yscale", yscale.domain(), yscale.range())
 
