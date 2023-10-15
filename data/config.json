@@ -21,7 +21,7 @@
         "title": "Kaufpreis",
         "type": "group",
         "groupKey": "year",
-        "x": "kaufpreis"
+        "y": "kaufpreis"
       }
     ],
     "textures": {

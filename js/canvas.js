@@ -459,6 +459,54 @@ function Canvas() {
     });
   }
 
+  function stackYLayout(data, invert) {
+    var groupKey = state.mode.groupKey
+    var years = d3
+      .nest()
+      .key(function (d) {
+        return d[groupKey];
+      })
+      .entries(data);
+    
+    // y scale for state.mode.y (e.g. "kaufpreis")
+    var yscale = d3.scale.linear()
+      .domain(d3.extent(data, function (d) { return +d[state.mode.y]; }))
+      .range([-15, -height*0.7]);
+
+    console.log("yscale", yscale.domain(), yscale.range())
+
+    years.forEach(function (year) {
+      var startX = x(year.key);
+
+      year.values.sort(function (a, b) {
+        return b[state.mode.y] - a[state.mode.y];
+      });
+
+      year.values.forEach(function (d, i) {
+        d.ii = i;
+
+        d.x = startX + (i % collumns) * (rangeBand / collumns);
+        d.y = yscale(d[state.mode.y]);
+        //d.y = (invert ? 1 : -1) * (row * (rangeBand / collumns));
+
+        d.x1 = d.x * scale1 + imageSize / 2;
+        d.y1 = d.y * scale1 + imageSize / 2;
+
+        if (d.sprite.position.x == 0) {
+          d.sprite.position.x = d.x1;
+          d.sprite.position.y = d.y1;
+        }
+
+        if (d.sprite2) {
+          d.sprite2.position.x = d.x * scale2 + imageSize2 / 2;
+          d.sprite2.position.y = d.y * scale2 + imageSize2 / 2;
+        }
+
+        //d.order = (invert ? 1 : 1) * (total - i);
+      });
+    });
+  }
+
   canvas.distance = function (a, b) {
     return Math.sqrt(
       (a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1])
@@ -871,14 +919,15 @@ function Canvas() {
   };
 
   canvas.split = function () {
+    var layout = state.mode.y ? stackYLayout : stackLayout;
     var active = data.filter(function (d) {
       return d.active;
     });
-    stackLayout(active, false);
+    layout(active, false);
     var inactive = data.filter(function (d) {
       return !d.active;
     });
-    stackLayout(inactive, true);
+    layout(inactive, true);
     quadtree = Quadtree(data);
   };
 
