@@ -816,22 +816,24 @@ svg {
 }
 
 .detail .entry.column .label {
-  width: 160px;
+  width: 200px;
   padding-right: 10px;
   flex: none;
   text-align: right;
-  font-size: 13px;
+  font-weight: bold;
+  /* font-size: 13px; */
 }
 
 .detail .entry .label {
   text-transform: uppercase;
   color: #FFFFFF;
-  font-weight: 900;
+  /* font-weight: 900; */
   flex: 1;
   padding-bottom: 3px;
 }
 
 .detail .entry .content {
+  
   flex: 1;
 }
 
@@ -872,7 +874,7 @@ svg {
 }
 
 .detail a {
-  color: #2D2D2D;
+  color: #FFF;
   font-style: normal;
 }
 

@@ -75,6 +75,11 @@ function init() {
           canvas.setMode("time");
         }
 
+        // setTimeout(function () {
+        //   var idx = 102
+        //   canvas.zoomToImage(data[idx], 100)
+        // }, 100);
+
         LoaderSprites()
           .progress(function (textures) {
             Object.keys(textures).forEach(function (id) {

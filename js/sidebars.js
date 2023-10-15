@@ -11,12 +11,14 @@ var detailVue = new Vue({
       canvas.changePage(this.id, page)
     },
     hasData: function (entry) {
-      return this.item.hasOwnProperty(entry.source) && this.item[entry.source] != 0 && this.getContent(entry) !== undefined && this.getContent(entry) !== null && this.getContent(entry) !== '' && this.getContent(entry) !== 'NaN'
+      return entry.type === 'space' ||
+      (this.item.hasOwnProperty(entry.source) && this.item[entry.source] != 0 && this.getContent(entry) !== undefined && this.getContent(entry) !== null && this.getContent(entry) !== '' && this.getContent(entry) !== 'NaN')
     },
     getContent: function (entry) {
       if (entry.type === 'text') {
         return this.item[entry.source]
       }
+ 
       if (entry.type === 'array') {
         return this.item[entry.source].join(', ')
       }

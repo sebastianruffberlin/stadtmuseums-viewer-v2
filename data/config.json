@@ -60,20 +60,8 @@
   "detail": {
     "structure": [
       {
-        "name": "Sammlung Online",
-        "source": "kid",
-        "display": "column",
-        "type": "link"
-      },
-      {
         "name": "Titel",
-        "source": "titeloriginalgloorstiftung",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Entstehungsjahr",
-        "source": "entstehungsjahr",
+        "source": "titel",
         "display": "column",
         "type": "text"
       },
@@ -84,110 +72,106 @@
         "type": "text"
       },
       {
-        "name": "KünstlerIn",
+        "name": "Künstler:in",
         "source": "knstlerin",
         "display": "column",
         "type": "text"
       },
       {
-        "name": "KünstlerIn Lebensdaten",
-        "source": "kuenstlerlebens",
+        "name": "Entstehungsjahr",
+        "source": "entstehungsjahr",
         "display": "column",
         "type": "text"
       },
       {
-        "name": "Weitere Titel Gloorsammlung",
-        "source": "titelgloorstiftung",
+        "name": "Lebensdaten",
+        "source": "lebensdaten",
         "display": "column",
         "type": "text"
       },
       {
-        "name": "Weitere Titel Leimgrubersammlung",
-        "source": "titelgloorleimgruber",
+        "name": "Sammlung Online",
+        "source": "sammlunglink",
+        "display": "column",
+        "type": "link"
+      },
+      {
+        "name": "Weitere Titel",
+        "source": "weiteretitel",
         "display": "column",
         "type": "text"
+      },
+      {
+        "name": "",
+        "source": "",
+        "display": "column",
+        "type": "space"
       },
       {
         "name": "Medium",
-        "source": "technik",
+        "source": "medium",
         "display": "column",
         "type": "text"
       },
       {
         "name": "Dimensionen",
-        "source": "masse",
+        "source": "dimensionen",
         "display": "column",
         "type": "text"
       },
       {
         "name": "Inventarnummer",
-        "source": "invnrkhz",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Gloornummer",
-        "source": "gloornr",
+        "source": "inventarnummer",
         "display": "column",
         "type": "text"
       },
       {
         "name": "Signatur",
-        "source": "bezeichnung",
+        "source": "signatur",
         "display": "column",
         "type": "text"
       },
       {
         "name": "Werkverzeichnis",
-        "source": "werkkatalog",
+        "source": "werkverzeichnis",
         "display": "column",
         "type": "text"
       },
       {
-        "name": "VerkäuferIn",
-        "source": "vorbesitzerin",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "KatNr",
-        "source": "katnr",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "VerkäuferIn",
-        "source": "vorbesitzerin",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Besitz",
-        "source": "stiftungfamilieanderes",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Periode",
-        "source": "periode",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Kaufpreis",
-        "source": "kaufpreis",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Kaufpreis CHF",
-        "source": "kaufpreischf",
+        "name": "Gloornummer",
+        "source": "gloornummer",
         "display": "column",
         "type": "text"
       },
       {
         "name": "Epoche",
-        "source": "alteanonymemoderne",
+        "source": "epoche",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Fälschung",
+        "source": "falsch",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "",
+        "source": "",
+        "display": "column",
+        "type": "space"
+      },
+
+
+      {
+        "name": "Besitz",
+        "source": "besitz",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Vorbesitzer:in",
+        "source": "vorbesitzerin",
         "display": "column",
         "type": "text"
       },
@@ -198,23 +182,37 @@
         "type": "text"
       },
       {
-        "name": "Emigration/Verfolgungskontext",
-        "source": "emi",
+        "name": "Emigration Verfolgungskontext",
+        "source": "emigrationverfolgung",
         "display": "column",
         "type": "text"
       },
       {
-        "name": "Verkäufe außerhalb NS-Machbereich",
-        "source": "nsraubkunstusachfr",
+        "name": "Kaufpreis",
+        "source": "kaufpreis",
         "display": "column",
         "type": "text"
       },
       {
-        "name": "Fälschung",
-        "source": "faelschung",
+        "name": "Währung",
+        "source": "whrung",
         "display": "column",
         "type": "text"
       },
+      {
+        "name": "Kaufpreis CHF",
+        "source": "kaufpreischf",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "",
+        "source": "",
+        "display": "column",
+        "type": "space"
+      },
+
+
       {
         "name": "provenienz",
         "source": "provenienz",

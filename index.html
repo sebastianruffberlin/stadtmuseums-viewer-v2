@@ -111,8 +111,8 @@ cpietsch@gmail.com
                   </span>
                 </span>
                 <span v-else-if="entry.type === 'link'">
-                  <a :href="'https://collection.kunsthaus.ch/de/collection/item/'+item[entry.source]"
-                    target="_blank">Link</a>
+                  <a :href="item[entry.source]"
+                    target="_blank">Öffnen</a>
                 </span>
                 <span v-else-if="entry.type === 'markdown'">
                   <span v-html="getContent(entry)"></span>
@@ -122,6 +122,9 @@ cpietsch@gmail.com
                 </span>
                 <span v-else-if="entry.type === 'function'">
                   <span v-html="getContent(entry)"></span>
+                </span>
+                <span v-else-if="entry.type === 'space'">
+                  <span class="space"></span>
                 </span>
                 <span v-else>
                   {{ getContent(entry) }}

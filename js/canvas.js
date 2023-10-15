@@ -652,6 +652,7 @@ function Canvas() {
         state.zoomingToImage = false;
       });
   }
+  canvas.zoomToImage = zoomToImage;
 
   function showDetail(d) {
     // console.log("show detail", d)
@@ -691,6 +692,8 @@ function Canvas() {
     detailVue.page = d.page;
     detailVue.item = detailData;
   }
+
+  canvas.showDetail = showDetail;
 
   canvas.changePage = function (id, page) {
     console.log("changePage", id, page, selectedImage);
