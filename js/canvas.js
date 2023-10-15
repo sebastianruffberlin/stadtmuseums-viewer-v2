@@ -431,7 +431,7 @@ function Canvas() {
       var startX = x(year.key);
       var total = year.values.length;
       year.values.sort(function (a, b) {
-        return b.keywords.length - a.keywords.length;
+        return a.kaufpreischf - b.kaufpreischf;
       });
 
       year.values.forEach(function (d, i) {
