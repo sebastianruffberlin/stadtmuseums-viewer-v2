@@ -471,9 +471,9 @@ function Canvas() {
     // y scale for state.mode.y (e.g. "kaufpreis")
     var yscale = d3.scale.linear()
       .domain(d3.extent(data, function (d) { return +d[state.mode.y]; }))
-      .range([-15, -height*0.7]);
+      .range([15, height*0.7]);
 
-    console.log("yscale", yscale.domain(), yscale.range())
+    // console.log("yscale", yscale.domain(), yscale.range())
 
     years.forEach(function (year) {
       var startX = x(year.key);
@@ -486,7 +486,7 @@ function Canvas() {
         d.ii = i;
 
         d.x = startX + (i % collumns) * (rangeBand / collumns);
-        d.y = yscale(d[state.mode.y]);
+        d.y = (invert ? 1 : -1) * yscale(d[state.mode.y]);
         //d.y = (invert ? 1 : -1) * (row * (rangeBand / collumns));
 
         d.x1 = d.x * scale1 + imageSize / 2;
@@ -505,6 +505,15 @@ function Canvas() {
         //d.order = (invert ? 1 : 1) * (total - i);
       });
     });
+
+    // data.filter(d => !d[state.mode.y]).forEach(function (d, i) {
+    //   d.x = 0;
+    //   d.y = 0;
+    //   d.active = false;
+    //   // d.sprite.visible = false;
+    //   // if (d.sprite2) d.sprite2.visible = false;
+    // })
+
   }
 
   canvas.distance = function (a, b) {
@@ -927,6 +936,7 @@ function Canvas() {
     var inactive = data.filter(function (d) {
       return !d.active;
     });
+    console.log("inactive", inactive);
     layout(inactive, true);
     quadtree = Quadtree(data);
   };

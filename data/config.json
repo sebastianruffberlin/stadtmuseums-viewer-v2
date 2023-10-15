@@ -8,16 +8,17 @@
     "items": "data/data.csv",
     "layouts": [
       {
+        "title": "Kaufpreis",
+        "type": "group",
+        "groupKey": "year",
+        "y": "kaufpreischf"
+      },
+      {
         "title": "Zeit",
         "type": "group",
         "groupKey": "year"
       },
-      {
-        "title": "Kaufpreis",
-        "type": "group",
-        "groupKey": "year",
-        "y": "kaufpreis"
-      },
+      
       {
         "title": "Ort",
         "type": "group",
