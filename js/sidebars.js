@@ -11,7 +11,7 @@ var detailVue = new Vue({
       canvas.changePage(this.id, page)
     },
     hasData: function (entry) {
-      return entry.type === 'space' ||
+      return entry.type === 'space' || entry.type === 'function' ||
       (this.item.hasOwnProperty(entry.source) && this.item[entry.source] != 0 && this.getContent(entry) !== undefined && this.getContent(entry) !== null && this.getContent(entry) !== '' && this.getContent(entry) !== 'NaN')
     },
     getContent: function (entry) {
@@ -37,6 +37,7 @@ var detailVue = new Vue({
       if (entry.type === 'function') {
         const column = this.item
         const func = entry.source
+        // console.log('eval', func, column)
         try {
           return eval(func)
         } catch (e) {

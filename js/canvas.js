@@ -678,6 +678,13 @@ function Canvas() {
       var val = selectedImage[field.source];
       if (val && val !== "") detailData[field.source] = val;
       else detailData[field.source] = "0";
+      if(field.fields && field.fields.length){
+        field.fields.forEach(function (subfield) {
+          var val = selectedImage[subfield];
+          console.log("subfield", subfield, val)
+          if (val && val !== "") detailData[subfield] = val;
+        })
+      }
       // detailData[field.source] = selectedImage[field.source];
     })
     // console.log("showDetail", detailData)
