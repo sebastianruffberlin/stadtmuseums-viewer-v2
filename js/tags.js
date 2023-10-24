@@ -32,7 +32,8 @@ function Tags() {
     }
 
     if(key === "besitz") {
-      filteredData = filteredData.filter(function(d) { return d.key != "anderes" })
+      removeKeys = ["Veräusserung", "Restitution", "anderes"]
+      filteredData = filteredData.filter(function(d) { return removeKeys.indexOf(d.key) == -1; })
     }
 
     if(sortArrays[key]) {
