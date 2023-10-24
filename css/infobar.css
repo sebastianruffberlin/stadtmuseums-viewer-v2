@@ -107,8 +107,9 @@
     z-index: 300;
     bottom: 15px;
     position: absolute;
-    left: 40%;
+    left: calc(50% - 18vw);
     display: flex;
+    width: 36vw;
 }
 
 .navi .button {
@@ -122,15 +123,17 @@
     /* background-repeat: no-repeat; */
     /* width: 90px; */
     /* height: 15px; */
-    padding:6px;
+    padding:5px 10px;
+    text-align: center;
     /* text-align: right; */
     background: #FFF;
-    border: 1px solid #0000ff;
-    border-radius: 1em;
+    border: 2px solid #0000ff;
+    border-radius: 0;
     cursor: pointer;
     /* font-weight: bold; */
     color: #0000ff;
-    margin-right: 5px;
+    margin-right: -2px;
+    flex-grow: 1;
 }
 
 .navi .button.active {

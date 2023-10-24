@@ -111,8 +111,7 @@ cpietsch@gmail.com
                   </span>
                 </span>
                 <span v-else-if="entry.type === 'link'">
-                  <a :href="item[entry.source]"
-                    target="_blank">Öffnen</a>
+                  <a :href="item[entry.source]" target="_blank">Öffnen</a>
                 </span>
                 <span v-else-if="entry.type === 'markdown'">
                   <span v-html="getContent(entry)"></span>

@@ -58,7 +58,7 @@ body {
   overflow: none;
   width: 100vw;
   height: 100vh;
-  background: #131415;
+  background: #ffffff;
   /*-moz-user-select: none;
    -webkit-user-select: none; 
   -ms-user-select:none;
@@ -429,7 +429,7 @@ svg {
 .timeline .year {
   transition: padding 0.2s;
   text-align: center;
-  color: rgb(51, 51, 51);
+  color: #0000ff;
   padding: 8%;
   /* border-bottom: 1px solid #eee; */
 }
@@ -728,7 +728,7 @@ svg {
   width: 20px;
   height: 30px;
   position: absolute;
-  background-image: url("../img/sideclosewhite.svg");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18.318' height='27.958' viewBox='0 0 18.318 27.958'%3E%3Cpath id='Path_2822' data-name='Path 2822' d='M-1583.115,218.86l-16.106,13.206,16.106,13.206' transform='translate(-1582.48 246.044) rotate(180)' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E%0A");  
   top: 50%;
   opacity: 0.7;
   cursor: pointer;
@@ -761,7 +761,7 @@ svg {
   /* transition: right 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); */
   transition: right 0.3s ease-out;
   /*box-shadow: 0 0px 56px rgba(0,0,0,0.26),0 0px 6px rgba(0,0,0,0.23);*/
-  box-shadow: -6px 0px 0px rgba(0, 0, 0, 0.11);
+  box-shadow: none;
   /* top: 20px; */
   right: 0px;
   position: absolute;
@@ -770,7 +770,7 @@ svg {
   background: rgb(255, 254, 250);
   /* background: url("img/koenigspapier.png"); */
   /* font-size: 13px; */
-  line-height: 1.3em;
+  line-height: 1.5em;
   /* overflow-y: scroll; */
 }
 
@@ -804,11 +804,19 @@ svg {
   /* overflow-y: scroll; */
 }
 
+.detail .entries .entry:first-of-type .content{
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 0.15rem;
+  line-height: 1.2;
+}
+
+
 
 .detail .entry {
-  display: flex;
+  //display: flex;
   flex-wrap: nowrap;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .detail .entry.wide {
@@ -819,7 +827,7 @@ svg {
   width: 200px;
   padding-right: 10px;
   flex: none;
-  text-align: right;
+  text-align: left;
   font-weight: bold;
   /* font-size: 13px; */
 }
