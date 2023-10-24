@@ -73,21 +73,10 @@
       },
       {
         "name": "Künstler:in",
-        "source": "knstlerin",
+        "source": "column.knstlerin + ' (' + column.lebensdaten + ')'",
         "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Entstehungsjahr",
-        "source": "entstehungsjahr",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Lebensdaten",
-        "source": "lebensdaten",
-        "display": "column",
-        "type": "text"
+        "type": "function",
+        "fields": ["knstlerin", "lebensdaten"]
       },
       {
         "name": "Sammlung Online",
@@ -171,15 +160,10 @@
       },
       {
         "name": "Vorbesitzer:in",
-        "source": "vorbesitzerin",
+        "source": "column.vorbesitzerin + ' (' + column.stadt + ')'",
         "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Stadt",
-        "source": "stadt",
-        "display": "column",
-        "type": "text"
+        "type": "function",
+        "fields": ["vorbesitzerin", "stadt"]
       },
       {
         "name": "Emigration Verfolgungskontext",
