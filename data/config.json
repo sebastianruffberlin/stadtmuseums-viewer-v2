@@ -189,19 +189,14 @@
       },
       {
         "name": "Kaufpreis",
-        "source": "kaufpreis",
+        "source": "column.kaufpreischf + ' CHF'",
         "display": "column",
-        "type": "text"
+        "type": "function",
+        "fields": ["kaufpreischf"]
       },
       {
         "name": "Währung",
         "source": "whrung",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Kaufpreis CHF",
-        "source": "kaufpreischf",
         "display": "column",
         "type": "text"
       },
