@@ -467,11 +467,11 @@ function Canvas() {
         return d[groupKey];
       })
       .entries(data);
-    
+
     // y scale for state.mode.y (e.g. "kaufpreis")
     var yscale = d3.scale.linear()
       .domain(d3.extent(data, function (d) { return +d[state.mode.y]; }))
-      .range([2* (rangeBand / collumns), height*0.7]);
+      .range([2 * (rangeBand / collumns), height * 0.7]);
 
     // console.log("yscale", yscale.domain(), yscale.range())
 
@@ -678,7 +678,7 @@ function Canvas() {
       var val = selectedImage[field.source];
       if (val && val !== "") detailData[field.source] = val;
       else detailData[field.source] = "0";
-      if(field.fields && field.fields.length){
+      if (field.fields && field.fields.length) {
         field.fields.forEach(function (subfield) {
           var val = selectedImage[subfield];
           console.log("subfield", subfield, val)
@@ -782,7 +782,7 @@ function Canvas() {
     } else {
       d3.select(".filter").classed("hide", false);
       d3.select(".vorbesitzerinOuter").classed("hide", false);
-      d3.select(".infobar").classed("sneak", false);
+      // d3.select(".infobar").classed("sneak", false);
       d3.select(".searchbar").classed("hide", false);
     }
 
