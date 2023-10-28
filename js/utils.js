@@ -45,10 +45,10 @@ utils.welcome = function () {
 utils.initConfig = function (config) {
 
 	// load infosidebar info.md
-	d3.text(utils.makeUrl(config.baseUrl.path, config.loader.info), function (error, text) {
-		// console.log(error, text)
-		if (text) infoVue.info = text
-	})
+	// d3.text(utils.makeUrl(config.baseUrl.path, config.loader.info), function (error, text) {
+	// 	// console.log(error, text)
+	// 	if (text) infoVue.info = text
+	// })
 
 	// d3.text(config.loader.info, function (text) { if (text) infoVue.info = text })
 

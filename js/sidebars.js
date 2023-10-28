@@ -12,13 +12,13 @@ var detailVue = new Vue({
     },
     hasData: function (entry) {
       return entry.type === 'space' || entry.type === 'function' ||
-      (this.item.hasOwnProperty(entry.source) && this.item[entry.source] != 0 && this.getContent(entry) !== undefined && this.getContent(entry) !== null && this.getContent(entry) !== '' && this.getContent(entry) !== 'NaN')
+        (this.item.hasOwnProperty(entry.source) && this.item[entry.source] != 0 && this.getContent(entry) !== undefined && this.getContent(entry) !== null && this.getContent(entry) !== '' && this.getContent(entry) !== 'NaN')
     },
     getContent: function (entry) {
       if (entry.type === 'text') {
         return this.item[entry.source]
       }
- 
+
       if (entry.type === 'array') {
         return this.item[entry.source].join(', ')
       }
@@ -49,15 +49,15 @@ var detailVue = new Vue({
 })
 window.detailVue = detailVue;
 
-var infoVue = new Vue({
-  el: '#infobar',
-  data: {
-    info: ""
-  },
-  methods: {
-    marked: function (input) {
-      return marked(input);
-    }
-  }
-})
-window.infoVue = infoVue;
+// var infoVue = new Vue({
+//   el: '#infobar',
+//   data: {
+//     info: ""
+//   },
+//   methods: {
+//     marked: function (input) {
+//       return marked(input);
+//     }
+//   }
+// })
+// window.infoVue = infoVue;
