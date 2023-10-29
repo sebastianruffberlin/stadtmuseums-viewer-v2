@@ -315,9 +315,15 @@ function Canvas() {
         if (selectedImageDistance > 15) return;
         if (selectedImage && !selectedImage.id) return;
         if (selectedImage && !selectedImage.active) return;
-        if (drag) return;
+        //if (drag) return;
 
-        zoomToImage(selectedImage, 1400 / Math.sqrt(Math.sqrt(scale)));
+        if (Math.abs(zoomedToImageScale - scale) < 0.1) {
+          canvas.resetZoom();
+        } else {
+          zoomToImage(selectedImage, 1400 / Math.sqrt(Math.sqrt(scale)));
+        }
+
+        // zoomToImage(selectedImage, 1400 / Math.sqrt(Math.sqrt(scale)));
       })
       .on("click", function () {
         console.log("click");
