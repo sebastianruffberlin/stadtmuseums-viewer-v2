@@ -145,9 +145,9 @@ function Canvas() {
 
     imgPadding = rangeBand / collumns / 2;
 
-    scale1 = imageSize / (x.rangeBand() / collumns);
-    scale2 = imageSize2 / (x.rangeBand() / collumns);
-    scale3 = imageSize3 / (x.rangeBand() / collumns);
+    scale1 = imageSize / rangeBandImage;
+    scale2 = imageSize2 / rangeBandImage;
+    scale3 = imageSize3 / rangeBandImage;
 
     stage3.scale.x = 1 / scale1;
     stage3.scale.y = 1 / scale1;
@@ -623,14 +623,16 @@ function Canvas() {
     d3.select(".filter, .vorbesitzerinOuter").classed("hide", true);
     var padding = (state.mode.type === "group" ? 0.1 : 0.8) * rangeBandImage;
     var sidbar = width / 8;
-    var scale =
-      (0.8 / (rangeBandImage / width)) * (state.mode.type === "group" ? 1 : 0.4);
-    console.log(d, padding);
-    //* (state.mode == "time" ? 1 : 0.5)
+    // var scale = d.sprite.width / rangeBandImage * collumns * 1.3;
+    var scale = scale1 * 4;
+    console.log(d, imgPadding, scale, scale1, padding, scale1, d.x, d.sprite.width);
+
     var translateNow = [
-      -scale * (d.x - padding),
-      -margin.bottom - scale * (height + d.y - padding),
+      -scale * (d.x + margin.left / scale1 / 6 ),
+      -scale * (height + d.y + (margin.top / scale1 / 2)),
     ];
+
+    console.log(translateNow)
 
     zoomedToImageScale = scale;
 
@@ -681,7 +683,7 @@ function Canvas() {
       if (field.fields && field.fields.length) {
         field.fields.forEach(function (subfield) {
           var val = selectedImage[subfield];
-          console.log("subfield", subfield, val)
+          // console.log("subfield", subfield, val)
           if (val && val !== "") detailData[subfield] = val;
         })
       }
