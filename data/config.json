@@ -76,13 +76,10 @@
         "source": "column.knstlerin + ' (' + column.lebensdaten + ')'",
         "display": "column",
         "type": "function",
-        "fields": ["knstlerin", "lebensdaten"]
-      },
-      {
-        "name": "Sammlung Online",
-        "source": "sammlunglink",
-        "display": "column",
-        "type": "link"
+        "fields": [
+          "knstlerin",
+          "lebensdaten"
+        ]
       },
       {
         "name": "Weitere Titel",
@@ -150,8 +147,6 @@
         "display": "column",
         "type": "space"
       },
-
-
       {
         "name": "Besitz",
         "source": "besitz",
@@ -163,7 +158,10 @@
         "source": "column.vorbesitzerin + ' (' + column.stadt + ')'",
         "display": "column",
         "type": "function",
-        "fields": ["vorbesitzerin", "stadt"]
+        "fields": [
+          "vorbesitzerin",
+          "stadt"
+        ]
       },
       {
         "name": "Emigration Verfolgungskontext",
@@ -176,7 +174,9 @@
         "source": "column.kaufpreischf + ' CHF'",
         "display": "column",
         "type": "function",
-        "fields": ["kaufpreischf"]
+        "fields": [
+          "kaufpreischf"
+        ]
       },
       {
         "name": "Währung",
@@ -190,8 +190,6 @@
         "display": "column",
         "type": "space"
       },
-
-
       {
         "name": "provenienz",
         "source": "provenienz",
