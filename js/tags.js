@@ -2,14 +2,15 @@ function Tags() {
 
   var fontsize = d3.scale.linear().range([8, 17])
 
-  var filter = { vorbesitzerin: [], epoche: [], besitz: [], raubkunst: [], emi: [], falsch: [] };
+  var filter = { vorbesitzerin: [], epoche: [], besitz: [], verkaufland: [], raubkunst: [], emi: [], falsch: [] };
   var lock = false;
   var data;
   var sortArrays = {
-    raubkunst: ["CH", "FR", "USA", "Raubkunst"],
+    verkaufland: ["CH", "FR", "USA", "Raubkunst"],
     besitz: ["Stiftung", "Privatbesitz", "Veräusserung", "Restitution", "anderes"],
     epoche: ["Moderne", "Alte Meister", "Mittelalter"]
   }
+  var removeKeys = ["Veräusserung", "Restitution", "anderes"];
 
   function addOrRemove(array, value) {
     array = array.slice();
@@ -31,14 +32,13 @@ function Tags() {
       fontsize.domain(d3.extent(filteredData, function (d) { return d.size; }))
     }
 
-    if(key === "besitz") {
-      removeKeys = ["Veräusserung", "Restitution", "anderes"]
-      filteredData = filteredData.filter(function(d) { return removeKeys.indexOf(d.key) == -1; })
+    if (key === "besitz") {
+      filteredData = filteredData.filter(function (d) { return removeKeys.indexOf(d.key) == -1; })
     }
 
-    if(sortArrays[key]) {
+    if (sortArrays[key]) {
       var sorted = sortArrays[key]
-      filteredData.sort(function(a, b) {
+      filteredData.sort(function (a, b) {
         return sorted.indexOf(a.key) - sorted.indexOf(b.key)
       })
     }
@@ -55,9 +55,9 @@ function Tags() {
       .classed("spacer", function (d) {
         return d.key === "Fälschung";
       })
-      .classed("raubkunst", function (d) {
-        return d.key === "Raubkunst";
-      })
+      // .classed("raubkunst", function (d) {
+      //   return d.key === "Raubkunst";
+      // })
       .text(function (d) {
         return d.key;
       })
@@ -175,7 +175,7 @@ function Tags() {
     if (!highlight) canvas.project();
   }
 
-  tags.search = function(){}
+  tags.search = function () { }
 
 
   return tags;

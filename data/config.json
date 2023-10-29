@@ -164,6 +164,12 @@
         ]
       },
       {
+        "name": "Raubkunst",
+        "source": "raubkunst",
+        "display": "column",
+        "type": "text"
+      },
+      {
         "name": "Emigration Verfolgungskontext",
         "source": "emigrationverfolgung",
         "display": "column",
