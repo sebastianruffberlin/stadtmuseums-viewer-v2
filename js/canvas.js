@@ -743,6 +743,8 @@ function Canvas() {
     });
   }
 
+  var zoomBarrierState = false;
+
   function zoomed() {
     translate = d3.event.translate;
     scale = d3.event.scale;
@@ -791,18 +793,27 @@ function Canvas() {
     timeline.update(x1, x2, scale, translate, scale1);
 
     // toggle zoom overlays
-    if (scale > zoomBarrier) {
+    if (scale > zoomBarrier && !zoomBarrierState) {
+      zoomBarrierState = true;
       d3.select(".filter").classed("hide", true);
       d3.select(".vorbesitzerinOuter").classed("hide", true);
       d3.select(".searchbar").classed("hide", true);
-      d3.select(".filterReset").classed("hide", true);
       d3.select(".infobar").classed("sneak", true);
-    } else {
+      // d3.select(".filterReset").classed("hide", true);
+      d3.select(".filterReset").text("Zur Übersicht")
+      // console.log("zoomBarrierState", zoomBarrierState)
+    }
+    if (scale < zoomBarrier && zoomBarrierState) {
+      zoomBarrierState = false;
       d3.select(".filter").classed("hide", false);
       d3.select(".vorbesitzerinOuter").classed("hide", false);
       // d3.select(".infobar").classed("sneak", false);
       d3.select(".searchbar").classed("hide", false);
-      d3.select(".filterReset").classed("hide", false);
+      d3.select(".filterReset").text("Filter zurücksetzen")
+
+      // d3.select(".filterReset").classed("hide", false);
+      // console.log("zoomBarrierState", zoomBarrierState)
+
     }
 
     stage2.scale.x = d3.event.scale;
@@ -956,7 +967,7 @@ function Canvas() {
       .duration(duration)
       .call(zoom.translate([0, y]).scale(1).event)
       .each("end", function () {
-        if (callback) callback();
+        if (callback && scale < zoomBarrier) callback();
       })
   };
 

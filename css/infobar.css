@@ -1,3 +1,17 @@
+#closeSidebar {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    width: 20px;
+    height: 20px;
+    background: url(../img/close.svg) no-repeat center center;
+}
+
+
 .infobar {
     float: left;
     font-size: 13px;

@@ -119,7 +119,7 @@ function init() {
   d3.select(".filterReset").on("click", function () {
     canvas.resetZoom(function () {
       tags.reset();
-      canvas.split();
+      //canvas.split();
     })
   });
 
