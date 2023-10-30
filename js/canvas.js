@@ -27,6 +27,8 @@ function Canvas() {
   var canvasDomain = [];
   var loadImagesCue = [];
 
+  var resolution = 1; // window.devicePixelRatio || 1;
+
   var x = d3.scale
     .ordinal()
     .rangeBands([margin.left, width + margin.left], 0.2);
@@ -255,7 +257,7 @@ function Canvas() {
     );
 
     var renderOptions = {
-      resolution: 1,
+      resolution: resolution,
       antialiasing: false,
       width: width + margin.left + margin.right,
       height: height,
@@ -627,15 +629,22 @@ function Canvas() {
     zoom.center(null);
     loadMiddleImage(d);
     d3.select(".filter, .vorbesitzerinOuter").classed("hide", true);
-    var padding = (state.mode.type === "group" ? 0.1 : 0.8) * rangeBandImage;
-    var sidbar = width / 8;
-    // var scale = d.sprite.width / rangeBandImage * collumns * 1.3;
-    var scale = scale1 * 4;
-    console.log(d, imgPadding, scale, scale1, padding, scale1, d.x, d.sprite.width);
+    // var padding = (state.mode.type === "group" ? 0.1 : 0.8) * rangeBandImage;
+    // var sidbar = width / 8;
+    // // var scale = d.sprite.width / rangeBandImage * collumns * 1.3;
+    // var scale = scale1 * 4;
+    // console.log(d, imgPadding, scale, scale1, padding, scale1, d.x, d.sprite.width);
 
+    // var translateNow = [
+    //   -scale * (d.x + margin.left / scale1 / 6 ),
+    //   -scale * (height + d.y + (margin.top / scale1 / 2)),
+    // ];
+
+    var padding = rangeBandImage / 2;
+    var scale = 1 / (rangeBandImage / (width*0.8));
     var translateNow = [
-      -scale * (d.x + margin.left / scale1 / 6 ),
-      -scale * (height + d.y + (margin.top / scale1 / 2)),
+      -scale * (d.x - padding) - (width*0.8) / 2 + margin.left,
+      -scale * (height + d.y + padding) - margin.top + height / 2,
     ];
 
     console.log(translateNow)
