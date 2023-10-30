@@ -641,9 +641,9 @@ function Canvas() {
     // ];
 
     var padding = rangeBandImage / 2;
-    var scale = 1 / (rangeBandImage / (width*0.8));
+    var scale = 1 / (rangeBandImage / (width * 0.8));
     var translateNow = [
-      -scale * (d.x - padding) - (width*0.8) / 2 + margin.left,
+      -scale * (d.x - padding) - (width * 0.8) / 2 + margin.left,
       -scale * (height + d.y + padding) - margin.top + height / 2,
     ];
 
@@ -795,12 +795,14 @@ function Canvas() {
       d3.select(".filter").classed("hide", true);
       d3.select(".vorbesitzerinOuter").classed("hide", true);
       d3.select(".searchbar").classed("hide", true);
+      d3.select(".filterReset").classed("hide", true);
       d3.select(".infobar").classed("sneak", true);
     } else {
       d3.select(".filter").classed("hide", false);
       d3.select(".vorbesitzerinOuter").classed("hide", false);
       // d3.select(".infobar").classed("sneak", false);
       d3.select(".searchbar").classed("hide", false);
+      d3.select(".filterReset").classed("hide", false);
     }
 
     stage2.scale.x = d3.event.scale;
@@ -935,8 +937,9 @@ function Canvas() {
     //chart.resetZoom();
   };
 
-  canvas.resetZoom = function () {
-    var duration = 1400;
+  canvas.resetZoom = function (callback) {
+    console.log(scale)
+    var duration = scale > 1 ? 1000 : 0;
 
     extent = d3.extent(data, function (d) {
       return d.y;
@@ -951,7 +954,10 @@ function Canvas() {
       .call(zoom.translate(translate).event)
       .transition()
       .duration(duration)
-      .call(zoom.translate([0, y]).scale(1).event);
+      .call(zoom.translate([0, y]).scale(1).event)
+      .each("end", function () {
+        if (callback) callback();
+      })
   };
 
   canvas.split = function () {

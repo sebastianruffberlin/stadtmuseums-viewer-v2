@@ -111,10 +111,17 @@ function init() {
     })
     .on("keydown", function (e) {
       if (d3.event.keyCode != 27) return;
-      search.reset();
+      //search.reset();
       tags.reset();
       canvas.split();
     });
+
+  d3.select(".filterReset").on("click", function () {
+    canvas.resetZoom(function () {
+      tags.reset();
+      canvas.split();
+    })
+  });
 
   d3.select(".slidebutton").on("click", function () {
     var s = !d3.select(".sidebar").classed("sneak");

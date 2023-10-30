@@ -155,6 +155,12 @@ function Tags() {
     tags.updateFilters();
   }
 
+  tags.reset = function () {
+    filter = { vorbesitzerin: [], epoche: [], besitz: [], verkaufland: [], raubkunst: [], emi: [], falsch: [] };
+    tags.filter();
+    tags.update();
+  }
+
   tags.filter = function (highlight) {
     console.log("update filter", filter, highlight)
 
