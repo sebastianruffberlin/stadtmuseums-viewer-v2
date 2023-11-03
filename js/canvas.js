@@ -33,6 +33,8 @@ function Canvas() {
     .ordinal()
     .rangeBands([margin.left, width + margin.left], 0.2);
 
+  var yscale = d3.scale.linear()
+
   var Quadtree = d3.geom
     .quadtree()
     .x(function (d) {
@@ -111,6 +113,8 @@ function Canvas() {
 
   function canvas() { }
 
+  canvas.margin = margin;
+
   canvas.rangeBand = function () {
     return rangeBand;
   };
@@ -128,6 +132,7 @@ function Canvas() {
     return selectedImage;
   };
   canvas.x = x;
+  canvas.y = yscale;
 
   canvas.resize = function () {
     if (!state.init) return;
@@ -212,6 +217,7 @@ function Canvas() {
 
 
     timeline.init(timeDomain);
+
     x.domain(canvasDomain);
 
   };
@@ -283,6 +289,7 @@ function Canvas() {
     stage2.addChild(stage5);
 
     canvas.initGroupLayout();
+    pricescale.init();
 
     //canvas.makeScales();
 
@@ -468,6 +475,7 @@ function Canvas() {
   }
 
   function stackYLayout(data, invert) {
+    if (data.length == 0) return
     var groupKey = state.mode.groupKey
     var years = d3
       .nest()
@@ -477,9 +485,12 @@ function Canvas() {
       .entries(data);
 
     // y scale for state.mode.y (e.g. "kaufpreis")
+    var yExtent = d3.extent(data, function (d) { return +d[state.mode.y]; })
+    var yRange = [2 * (rangeBand / collumns), height * 0.7]
+
     var yscale = d3.scale.linear()
-      .domain(d3.extent(data, function (d) { return +d[state.mode.y]; }))
-      .range([2 * (rangeBand / collumns), height * 0.7]);
+      .domain(yExtent)
+      .range(yRange);
 
     // console.log("yscale", yscale.domain(), yscale.range())
 
@@ -521,6 +532,7 @@ function Canvas() {
     //   // d.sprite.visible = false;
     //   // if (d.sprite2) d.sprite2.visible = false;
     // })
+    if (!invert) pricescale.updateDomain(yRange, yExtent)
 
   }
 
@@ -590,9 +602,9 @@ function Canvas() {
     if (layout.type == "group") {
       canvas.initGroupLayout();
     }
-    if (layout.timeline) {
-      canvas.setCustomTimelineData()
-    }
+    // if (layout.timeline) {
+    //   canvas.setCustomTimelineData()
+    // }
 
     timeline.setDisabled(layout.type != "group" && !layout.timeline);
     canvas.makeScales();
@@ -791,6 +803,7 @@ function Canvas() {
     }
 
     timeline.update(x1, x2, scale, translate, scale1);
+    pricescale.update(x1, x2, scale, translate, scale1);
 
     // toggle zoom overlays
     if (scale > zoomBarrier && !zoomBarrierState) {
