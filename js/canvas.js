@@ -969,10 +969,13 @@ function Canvas() {
       return d.y;
     });
 
-    var y = -extent[1] - bottomPadding;
-    y = extent[1] / -3 - bottomPadding;
-    // this needs a major cleanup
-    y = Math.max(y, -bottomPadding);
+    // var y = -extent[1] - bottomPadding;
+    // y = extent[1] / -3 - bottomPadding;
+    // // this needs a major cleanup
+    // y = Math.max(y, -bottomPadding);
+    var y = -bottomPadding;
+
+    // console.log("resetZoom", y,extent)
 
     vizContainer
       .call(zoom.translate(translate).event)

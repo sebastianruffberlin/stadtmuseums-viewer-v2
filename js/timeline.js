@@ -28,6 +28,7 @@ function Pricescale() {
   pricescale.updateDomain = function (_range, _extent) {
     yscale.range(_range).domain(_extent);
     ticks = yscale.ticks(numTicks)
+      .filter(function (d) { return d != 0; });
     // remove first tick
     //ticks.shift();
     // var endTick = Math.ceil(_extent[1] / ticks[0]) * ticks[0];
@@ -39,10 +40,17 @@ function Pricescale() {
 
   pricescale.update = function (x1, x2, scale, translate) {
     if (disabled || !translate) return;
-    console.log("pricescale update", scale, translate);
+    // console.log("pricescale update", scale, translate);
     var y0 = -1 * translate[1] || 0;
+    var timeY =
+      canvas.height() * scale -
+      -1 * translate[1] +
+      canvas.rangeBandImage() * scale;
 
     var select = container.selectAll(".container").data(ticks, function (d, i) { return i; });
+
+    container
+      .style("transform", "translate3d(" + canvas.margin.left + "px," + timeY + "px, 0px)");
 
     var enter = select
       .enter()
@@ -58,7 +66,8 @@ function Pricescale() {
 
     select
       .style("transform", function (d) {
-        var y = canvas.height() - yscale(d) - y0;
+        var y =  -yscale(d);
+        y = y * scale;
         return "translate3d(0px," + y + "px,0px)";
       })
       .text(function (d) {
