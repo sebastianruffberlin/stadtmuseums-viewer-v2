@@ -37,6 +37,8 @@ var tags;
 var canvas;
 var search;
 var ping;
+var timeline;
+var pricescale;
 
 if (Modernizr.webgl && !utils.isMobile()) {
   init();
@@ -48,6 +50,7 @@ function init() {
   canvas = Canvas();
   search = Search();
   timeline = Timeline();
+  pricescale = Pricescale();
   ping = utils.ping();
 
   var baseUrl = utils.getDataBaseUrl();

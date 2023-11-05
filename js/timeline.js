@@ -1,3 +1,92 @@
+function Pricescale() {
+  var container;
+  var yscale = d3.scale.linear();
+  var extent;
+  var disabled = false;
+  var ticks = [];
+  var numTicks = 6;
+  var tickFormat = d3.format(".2s");
+
+  function tickFormatGerman(d) {
+    var s = d3.format(",")(d);
+    return s.replace(/,/g, ".");
+  }
+
+  function pricescale() { }
+
+  pricescale.init = function () {
+    if (!d3.select(".pricescale").empty()) {
+      d3.select(".pricescale").remove();
+    }
+    container = d3.select(".viz").append("div").classed("pricescale", true);
+    container.style(
+      "transform",
+      "translate(" + canvas.margin.left + "px," + 0 + "px)"
+    );
+  };
+
+  pricescale.setDisabled = function (d) {
+    disabled = d;
+    container.style("display", disabled ? "none" : "block");
+  }
+
+  pricescale.updateDomain = function (_range, _extent) {
+    yscale.range(_range).domain(_extent);
+    ticks = yscale.ticks(numTicks)
+      .filter(function (d) { return d != 0; });
+    // remove first tick
+    //ticks.shift();
+    // var endTick = Math.ceil(_extent[1] / ticks[0]) * ticks[0];
+    // console.log("endTick", endTick);
+    // ticks.push(endTick);
+    console.log("pricescale updateDomain", yscale, _extent, ticks);
+    pricescale.update();
+  }
+
+  pricescale.update = function (x1, x2, scale, translate) {
+    if (disabled || !translate) return;
+    // console.log("pricescale update", scale, translate);
+    var y0 = -1 * translate[1] || 0;
+    var timeY =
+      canvas.height() * scale -
+      -1 * translate[1] +
+      canvas.rangeBandImage() * scale;
+
+    var select = container.selectAll(".container").data(ticks, function (d, i) { return i; });
+
+    container
+      .style("transform", "translate3d(" + canvas.margin.left + "px," + timeY + "px, 0px)");
+
+    var enter = select
+      .enter()
+      .append("div")
+      .classed("container", true);
+
+    enter
+      .append("div")
+      .classed("price", true)
+      .text(function (d) {
+        return tickFormatGerman(d);
+      });
+
+    select
+      .style("transform", function (d) {
+        var y =  -yscale(d);
+        y = y * scale;
+        return "translate3d(0px," + y + "px,0px)";
+      })
+      .text(function (d) {
+        return tickFormatGerman(d);
+      });
+
+    select.exit().remove();
+
+  };
+
+  return pricescale;
+};
+
+
 function Timeline() {
   var fontScaleYear = d3.scale
     .linear()
@@ -34,6 +123,7 @@ function Timeline() {
       "transform",
       "translate(" + 0 + "px," + (canvas.height() - 30) + "px)"
     );
+
   };
 
   timeline.rescale = function (scale) {
@@ -155,3 +245,4 @@ function Timeline() {
 
   return timeline;
 }
+
