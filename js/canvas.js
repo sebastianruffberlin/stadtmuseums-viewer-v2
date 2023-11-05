@@ -472,6 +472,8 @@ function Canvas() {
         d.order = (invert ? 1 : 1) * (total - i);
       });
     });
+
+    pricescale.setDisabled(true)
   }
 
   function stackYLayout(data, invert) {
@@ -535,7 +537,7 @@ function Canvas() {
     //   // if (d.sprite2) d.sprite2.visible = false;
     // })
     if (!invert) pricescale.updateDomain(yRange, yExtent)
-
+    pricescale.setDisabled(false)
   }
 
   canvas.distance = function (a, b) {
