@@ -488,6 +488,8 @@ function Canvas() {
     var yExtent = d3.extent(data, function (d) { return +d[state.mode.y]; })
     var yRange = [2 * (rangeBand / collumns), height * 0.7]
 
+    yExtent[0] = 0;
+
     var yscale = d3.scale.linear()
       .domain(yExtent)
       .range(yRange);

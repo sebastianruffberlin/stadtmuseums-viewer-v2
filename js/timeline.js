@@ -7,6 +7,11 @@ function Pricescale() {
   var numTicks = 6;
   var tickFormat = d3.format(".2s");
 
+  function tickFormatGerman(d) {
+    var s = d3.format(",")(d);
+    return s.replace(/,/g, ".");
+  }
+
   function pricescale() { }
 
   pricescale.init = function () {
@@ -61,7 +66,7 @@ function Pricescale() {
       .append("div")
       .classed("price", true)
       .text(function (d) {
-        return tickFormat(d);
+        return tickFormatGerman(d);
       });
 
     select
@@ -71,7 +76,7 @@ function Pricescale() {
         return "translate3d(0px," + y + "px,0px)";
       })
       .text(function (d) {
-        return tickFormat(d);
+        return tickFormatGerman(d);
       });
 
     select.exit().remove();
