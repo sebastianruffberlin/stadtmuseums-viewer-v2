@@ -318,22 +318,27 @@ function Canvas() {
         mousemove(d);
         touchstart = new Date() * 1;
       })
-      .on("touchend", function (d) {
-        var touchtime = new Date() * 1 - touchstart;
-        if (touchtime > 250) return;
-        if (selectedImageDistance > 15) return;
-        if (selectedImage && !selectedImage.id) return;
-        if (selectedImage && !selectedImage.active) return;
-        //if (drag) return;
+      // .on("touchend", function (d) {
+      //   var touchtime = new Date() * 1 - touchstart;
+      //   if (touchtime > 250) {
+      //     console.log("longtouch", touchtime);
+      //     return;
+      //   }
+      //   if (selectedImageDistance > 15) return;
+      //   if (selectedImage && !selectedImage.id) return;
+      //   if (selectedImage && !selectedImage.active) return;
+      //   if (drag) return;
 
-        if (Math.abs(zoomedToImageScale - scale) < 0.1) {
-          canvas.resetZoom();
-        } else {
-          zoomToImage(selectedImage, 1400 / Math.sqrt(Math.sqrt(scale)));
-        }
+      //   console.log("touch zoom")
 
-        // zoomToImage(selectedImage, 1400 / Math.sqrt(Math.sqrt(scale)));
-      })
+      //   // if (Math.abs(zoomedToImageScale - scale) < 0.1) {
+      //   //   canvas.resetZoom();
+      //   // } else {
+      //   //   zoomToImage(selectedImage, 1400 / Math.sqrt(Math.sqrt(scale)));
+      //   // }
+
+      //   // zoomToImage(selectedImage, 1400 / Math.sqrt(Math.sqrt(scale)));
+      // })
       .on("click", function () {
         console.log("click");
         if (spriteClick) {
@@ -350,10 +355,17 @@ function Canvas() {
 
         if (Math.abs(zoomedToImageScale - scale) < 0.1) {
           canvas.resetZoom();
+          // console.log("reset zoom")
         } else {
+          // console.log("zoom to image", zoomedToImageScale, scale)
           zoomToImage(selectedImage, 1400 / Math.sqrt(Math.sqrt(scale)));
         }
       });
+
+    // disable right click
+    vizContainer.on("contextmenu", function () {
+      d3.event.preventDefault();
+    });
 
     //canvas.makeScales();
     //canvas.project();
@@ -892,7 +904,7 @@ function Canvas() {
 
     if (state.mode.type === "group") {
       canvas.split();
-      cursorCutoff = (1 / scale1) * imageSize * 0.48;
+      cursorCutoff = (1 / scale1) * imageSize * 1;
     } else {
       canvas.projectTSNE();
       cursorCutoff = (1 / scale1) * imageSize * 1;
