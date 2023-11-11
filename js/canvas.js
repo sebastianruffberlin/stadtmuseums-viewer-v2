@@ -256,15 +256,15 @@ function Canvas() {
       imageSize3 = config.loader.textures.big.size;
     }
 
-    PIXI.settings.SCALE_MODE = 1;
-    PIXI.settings.SPRITE_MAX_TEXTURES = Math.min(
-      PIXI.settings.SPRITE_MAX_TEXTURES,
-      16
-    );
+    // PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+    // PIXI.settings.SPRITE_MAX_TEXTURES = Math.min(
+    //   PIXI.settings.SPRITE_MAX_TEXTURES,
+    //   16
+    // );
 
     var renderOptions = {
       resolution: resolution,
-      antialiasing: false,
+      antialiasing: true,
       width: width + margin.left + margin.right,
       height: height,
     };
@@ -309,15 +309,25 @@ function Canvas() {
       stage3.addChild(sprite);
     });
 
+    var lastClick = 0;
+
     vizContainer = d3
       .select(".viz")
       .call(zoom)
       .on("mousemove", mousemove)
       .on("dblclick.zoom", null)
+      .on("dblclick", null)
       .on("touchstart", function (d) {
         mousemove(d);
         touchstart = new Date() * 1;
       })
+      // .on("touchend", function (d, i, nodes, event) {
+      //   var touchtime = new Date() * 1 - touchstart;
+      //   if (touchtime < 20) {
+      //     console.log("touched", touchtime, d, i, nodes, event);
+      //     return;
+      //   }
+      // })
       // .on("touchend", function (d) {
       //   var touchtime = new Date() * 1 - touchstart;
       //   if (touchtime > 250) {
@@ -340,6 +350,11 @@ function Canvas() {
       //   // zoomToImage(selectedImage, 1400 / Math.sqrt(Math.sqrt(scale)));
       // })
       .on("click", function () {
+
+        var clicktime = new Date() * 1 - lastClick;
+        if (clicktime < 250) return;
+        lastClick = new Date() * 1;
+
         console.log("click");
         if (spriteClick) {
           spriteClick = false;
@@ -366,6 +381,8 @@ function Canvas() {
     vizContainer.on("contextmenu", function () {
       d3.event.preventDefault();
     });
+
+
 
     //canvas.makeScales();
     //canvas.project();
@@ -654,6 +671,7 @@ function Canvas() {
 
   function zoomToImage(d, duration) {
     state.zoomingToImage = true;
+    vizContainer.style("pointer-events", "none");
     zoom.center(null);
     loadMiddleImage(d);
     d3.select(".filter, .vorbesitzerinOuter").classed("hide", true);
@@ -675,7 +693,7 @@ function Canvas() {
       -scale * (height + d.y + padding) - margin.top + height / 2,
     ];
 
-    console.log(translateNow)
+    // console.log(translateNow)
 
     zoomedToImageScale = scale;
 
@@ -695,6 +713,8 @@ function Canvas() {
         showDetail(d);
         loadBigImage(d, "click");
         state.zoomingToImage = false;
+        console.log("zoomedToImage", zoomedToImage);
+        vizContainer.style("pointer-events", "auto");
       });
   }
   canvas.zoomToImage = zoomToImage;

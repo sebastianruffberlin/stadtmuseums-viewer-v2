@@ -86,13 +86,20 @@ function init() {
         LoaderSprites()
           .progress(function (textures) {
             Object.keys(textures).forEach(function (id) {
-              data
-                .filter(function (d) {
-                  return d.id === id;
-                })
-                .forEach(function (d) {
-                  d.sprite.texture = textures[id];
-                });
+              var sprite = data.find(function (d) {
+                return d.id === id;
+              })
+              if (sprite) {
+                sprite.sprite.texture = textures[id];
+              }
+
+              // data
+              //   .filter(function (d) {
+              //     return d.id === id;
+              //   })
+              //   .forEach(function (d) {
+              //     d.sprite.texture = textures[id];
+              //   });
             });
             canvas.wakeup();
           })
