@@ -1,0 +1,14 @@
+{
+  "name": "291b8763a5476f19",
+  "main": "291b8763a5476f19@426.js",
+  "version": "426.0.0",
+  "homepage": "https://observablehq.com/d/291b8763a5476f19",
+  "author": {
+    "name": "Christopher Pietsch",
+    "url": "https://observablehq.com/@cpietsch"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
