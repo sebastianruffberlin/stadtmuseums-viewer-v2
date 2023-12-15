@@ -164,6 +164,8 @@ function Tags() {
   tags.filter = function (highlight) {
     console.log("update filter", filter, highlight)
 
+    d3.select(".infobar").classed("sneak", true);
+
     var filters = Object.entries(highlight || filter).filter(function (d) { return d[1].length; })
     // console.log(filters)
     data.forEach(function (d) {
