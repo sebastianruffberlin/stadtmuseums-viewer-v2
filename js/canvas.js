@@ -14,6 +14,8 @@ function Canvas() {
   var width = window.innerWidth - margin.left - margin.right;
   var widthOuter = window.innerWidth;
   var height = window.innerHeight < minHeight ? minHeight : window.innerHeight;
+  console.log("height", height)
+  console.log("width", width)
 
   var scale;
   var scale1 = 1;
@@ -687,9 +689,11 @@ function Canvas() {
     // ];
 
     var padding = rangeBandImage / 2;
-    var scale = 1 / (rangeBandImage / (width * 0.8));
+    //var scale = 1 / (rangeBandImage / (width * 0.8));
+    var max = Math.max(width, height);
+    var scale = 1 / (rangeBandImage / (max * 0.6));
     var translateNow = [
-      -scale * (d.x - padding) - (width * 0.8) / 2 + margin.left,
+      -scale * (d.x - padding) - (max * 0.3) / 2 + margin.left,
       -scale * (height + d.y + padding) - margin.top + height / 2,
     ];
 
