@@ -1,0 +1,213 @@
+{
+  "project": {
+    "name": "Kunsthaus",
+    "quality": 1
+  },
+  "loader": {
+    "info": "data/info.md",
+    "items": "data/data.csv",
+    "layouts": [
+      {
+        "title": "Zeit",
+        "type": "group",
+        "groupKey": "year"
+      },
+      {
+        "title": "Kaufpreis",
+        "type": "group",
+        "groupKey": "year",
+        "y": "kaufpreischf"
+      },
+      {
+        "title": "Ort",
+        "type": "group",
+        "groupKey": "stadt"
+      }
+    ],
+    "textures": {
+      "medium": {
+        "size": 200,
+        "url": "data/local/sprites/spritesheet.json"
+      },
+      "detail": {
+        "size": 1024,
+        "url": "data/local/1024/"
+      },
+      "big": {
+        "size": 4096,
+        "url": "data/local/4096/"
+      }
+    }
+  },
+  "style": {
+    "fontColor": "#0000ff",
+    "fontColorActive": "#f0f0f0",
+    "fontBackground": "#333333",
+    "textShadow": "1px 1px 0px #f8f4e9",
+    "canvasBackground": "#ffffff",
+    "timelineBackground": "#fff9eb",
+    "timelineFontColor": "#000",
+    "backgroundHeader": "#333333",
+    "fontColorHeader": "#C6C6C6",
+    "detailBackground": "#0000ff",
+    "infoBackground": "#0000ff",
+    "infoFontColor": "#ffffff",
+    "searchbarBackground": "#DAA520"
+  },
+  "projection": {
+    "columns": 3
+  },
+  "detail": {
+    "structure": [
+      {
+        "name": "Titel",
+        "source": "titel",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Entstehungszeit",
+        "source": "entstehungszeit",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Künstler:in",
+        "source": "column.knstlerin + ' (' + column.lebensdaten + ')'",
+        "display": "column",
+        "type": "function",
+        "fields": [
+          "knstlerin",
+          "lebensdaten"
+        ]
+      },
+      {
+        "name": "Weitere Titel",
+        "source": "weiteretitel",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "",
+        "source": "",
+        "display": "column",
+        "type": "space"
+      },
+      {
+        "name": "Medium",
+        "source": "medium",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Dimensionen",
+        "source": "dimensionen",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Inventarnummer",
+        "source": "inventarnummer",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Signatur",
+        "source": "signatur",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Werkverzeichnis",
+        "source": "werkverzeichnis",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Gloornummer",
+        "source": "gloornummer",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Epoche",
+        "source": "epoche",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Fälschung",
+        "source": "falsch",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "",
+        "source": "",
+        "display": "column",
+        "type": "space"
+      },
+      {
+        "name": "Besitz",
+        "source": "besitz",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Vorbesitzer:in",
+        "source": "column.vorbesitzerin + ' (' + column.stadt + ')'",
+        "display": "column",
+        "type": "function",
+        "fields": [
+          "vorbesitzerin",
+          "stadt"
+        ]
+      },
+      {
+        "name": "Raubkunst",
+        "source": "raubkunst",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Emigration Verfolgungskontext",
+        "source": "emigrationverfolgung",
+        "display": "column",
+        "type": "text"
+      },
+      {
+        "name": "Kaufpreis",
+        "source": "column.kaufpreischf + ' CHF'",
+        "display": "column",
+        "type": "function",
+        "fields": [
+          "kaufpreischf"
+        ]
+      },
+      {
+        "name": "",
+        "source": "",
+        "display": "column",
+        "type": "space"
+      },
+      {
+        "name": "provenienz",
+        "source": "provenienz",
+        "display": "wide",
+        "type": "html"
+      },
+      {
+        "name": "ausstellungen",
+        "source": "ausstellungen",
+        "display": "wide",
+        "type": "html"
+      },
+      {
+        "name": "literatur",
+        "source": "literatur",
+        "display": "wide",
+        "type": "html"
+      }
+    ]
+  }
+}
