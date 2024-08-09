@@ -914,6 +914,7 @@ function Canvas() {
   // }
 
   canvas.project = function () {
+    ping();
     sleep = false;
     var scaleFactor = state.mode.type == "group" ? 0.9 : tsneScale[state.mode.title] || 0.5;
     data.forEach(function (d) {

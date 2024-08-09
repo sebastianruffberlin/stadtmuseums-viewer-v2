@@ -132,6 +132,10 @@ function init() {
       //canvas.split();
     })
   });
+  d3.select(".filterReset").on("dblclick", function () {
+    console.log("dblclick");
+    location.reload();
+  });
 
   d3.select(".slidebutton").on("click", function () {
     var s = !d3.select(".sidebar").classed("sneak");
