@@ -81,7 +81,7 @@ utils.initConfig = function (config) {
 // exhibition installations, will reinitialize the vis after x seconds
 utils.ping = function () {
 	var time = +new Date();
-	var timeout = 1 * 60 * 1000;
+	var timeout = 1 * 60 * 2000;
 	var interval = setInterval(function () {
 		if (new Date() - time > timeout) {
 			console.log("ping reload")
