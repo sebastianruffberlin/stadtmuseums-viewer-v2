@@ -1,0 +1,3 @@
+[Timer]
+OnCalendar=20:30
+Persistent=true
