@@ -1,0 +1,14 @@
+[Unit]
+Description=Chromium Kiosk
+Wants=graphical.target
+After=graphical.target
+
+[Service]
+Type=simple
+ExecStart=/snap/bin/chromium --enable-features=UseOzonePlatform --ozone-platform=wayland --app="http://localhost/" --kiosk --noerrdialogs --disable-infobars --enable-features=OverlayScrollbar --disable-pinch
+Restart=on-abort
+User=buehrle
+Group=buehrle
+
+[Install]
+WantedBy=graphical.target
