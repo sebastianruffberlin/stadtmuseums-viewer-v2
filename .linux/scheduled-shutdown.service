@@ -1,0 +1,6 @@
+[Unit]
+Description=Scheduled Shutdown at 9 PM
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/shutdown -h now
