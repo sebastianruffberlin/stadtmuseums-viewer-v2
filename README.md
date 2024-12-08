@@ -14,5 +14,11 @@ Based on [VIKUS Viewer](https://github.com/cpietsch/vikus-viewer) is a web-based
 - install nginx `sudo apt install nginx`
 - clone into `/var/www/html`
 - move data.tar to data/local
-- `sudo cp .linux/kiosk.service /etc/systemd/system/`
-- `sudo systemctl enable kiosk`
+
+### Services
+```sh
+sudo cp .linux/* /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable scheduled-shutdown.timer
+sudo systemctl enable kiosk
+```
