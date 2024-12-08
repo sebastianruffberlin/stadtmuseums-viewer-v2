@@ -16,3 +16,4 @@ Based on [VIKUS Viewer](https://github.com/cpietsch/vikus-viewer) is a web-based
 - move data.tar to data/local
 - `sudo cp .linux/kiosk.service /etc/systemd/system/`
 - `sudo systemctl enable kiosk`
+- `/snap/bin/chromium --enable-features=UseOzonePlatform --ozone-platform=wayland --app="http://localhost/" --kiosk --noerrdialogs --disable-infobars --enable-features=OverlayScrollbar --disable-pinch`
