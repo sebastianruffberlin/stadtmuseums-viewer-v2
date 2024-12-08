@@ -456,11 +456,11 @@ function Canvas() {
       selectedImage = d;
     }
 
-    container.style("cursor", function () {
-      return selectedImageDistance < cursorCutoff && selectedImage.active
-        ? "pointer"
-        : "default";
-    });
+    // container.style("cursor", function () {
+    //   return selectedImageDistance < cursorCutoff && selectedImage.active
+    //     ? "pointer"
+    //     : "default";
+    // });
     // }
   }
 

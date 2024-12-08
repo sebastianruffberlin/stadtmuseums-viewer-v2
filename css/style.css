@@ -25,6 +25,7 @@ html {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  cursor: none !important;
 }
 
 /* @font-face {
