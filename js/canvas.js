@@ -29,7 +29,7 @@ function Canvas() {
   var canvasDomain = [];
   var loadImagesCue = [];
 
-  var resolution = 1; // window.devicePixelRatio || 1;
+  var resolution = window.devicePixelRatio || 1;
 
   var x = d3.scale
     .ordinal()
@@ -71,6 +71,7 @@ function Canvas() {
   var imageSize3 = 4000;
   var collumns = 4;
   var renderer, stage;
+  var renderElem;
 
   var svgscale, voronoi;
 
@@ -142,6 +143,8 @@ function Canvas() {
     height = window.innerHeight < minHeight ? minHeight : window.innerHeight;
     widthOuter = window.innerWidth;
     renderer.resize(width + margin.left + margin.right, height);
+    renderElem.style("width", widthOuter + "px");
+    renderElem.style("height", height + "px");
     canvas.makeScales();
     canvas.project();
   };
@@ -266,7 +269,7 @@ function Canvas() {
 
     var renderOptions = {
       resolution: resolution,
-      antialiasing: true,
+      // antialiasing: false,
       width: width + margin.left + margin.right,
       height: height,
     };
@@ -277,7 +280,9 @@ function Canvas() {
     );
     window.renderer = renderer;
 
-    var renderElem = d3.select(container.node().appendChild(renderer.view));
+    renderElem = d3.select(container.node().appendChild(renderer.view));
+    renderElem.style("width", widthOuter + "px");
+    renderElem.style("height", height + "px");
 
     stage = new PIXI.Container();
     stage2 = new PIXI.Container();
