@@ -22,3 +22,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable scheduled-shutdown.timer
 sudo systemctl enable kiosk
 ```
+
+
+## Screen
+- https://iiyama.com/de_de/produkte/prolite-tf6539uhsc-b1ag/
