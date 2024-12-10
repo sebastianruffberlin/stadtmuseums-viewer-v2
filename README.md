@@ -23,6 +23,18 @@ sudo systemctl enable scheduled-shutdown.timer
 sudo systemctl enable kiosk
 ```
 
+### history
+
+```sh
+ 343  sudo systemctl list-timers
+  344  sudo systemctl disable update-notifier-motd.service update-notifier-download.service
+  345  sudo systemctl disable update-notifier-download.timer update-notifier-motd.timer
+  349  systemctl status update-notifier-download.timer
+  350  sudo systemctl stop update-notifier-download.timer
+  351  sudo systemctl disable update-notifier-download.timer
+  352  sudo systemctl disable update-notifier-download.service
+  353  sudo systemctl mask update-notifier-download.service
+```
 
 ## Screen
 - https://iiyama.com/de_de/produkte/prolite-tf6539uhsc-b1ag/
