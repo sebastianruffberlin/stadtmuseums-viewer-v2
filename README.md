@@ -36,5 +36,9 @@ sudo systemctl enable kiosk
   353  sudo systemctl mask update-notifier-download.service
 ```
 
+```
+chromium --app="http://localhost/" --kiosk --noerrdialogs --disable-infobars --enable-features=OverlayScrollbar --disable-pinch --high-dpi-support=1 --force-device-scale-factor=2
+```
+
 ## Screen
 - https://iiyama.com/de_de/produkte/prolite-tf6539uhsc-b1ag/
