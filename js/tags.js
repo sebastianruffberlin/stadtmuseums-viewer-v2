@@ -151,8 +151,12 @@ function Tags() {
     }
   }
 
-  tags.init = function (_data, config) {
+  tags.init = function(_data, config) {
     data = _data;
+    // Ensure filter is initialized, especially if 'tags' was re-instantiated
+    if (!filter || Object.keys(filter).length === 0) {
+        filter = { geschlecht: [] }; // Re-initialize if empty or not an object
+    }
     tags.updateFilters(); // Initialize and draw the filter buttons
   }
 
