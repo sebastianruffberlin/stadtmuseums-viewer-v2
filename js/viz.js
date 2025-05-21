@@ -86,6 +86,10 @@ d3.json(baseUrl.config || "data/config.json", function (config) {
       Loader(makeUrl(baseUrl.path, config.loader.items)).finished(function (_data) {
         data = _data; // Assign to the global 'data' variable
         console.log(data);
+        console.log('--- DEBUG: Loaded _data value ---', _data); // ADD THIS LINE for inspection
+        console.log('--- DEBUG: Type of _data ---', typeof _data); // ADD THIS LINE for inspection
+        console.log('--- DEBUG: Is _data an Array? ---', Array.isArray(_data)); // ADD THIS LINE for inspection
+        console.log('--- DEBUG: Length of _data ---', (_data && _data.length)); // ADD THIS LINE for inspection
 
         utils.clean(data, config.delimiter);
 
