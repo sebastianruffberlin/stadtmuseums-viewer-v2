@@ -58,48 +58,61 @@ function init() {
 
   console.log(baseUrl);
 
-  d3.json(baseUrl.config || "data/config.json", function (config) {
+d3.json(baseUrl.config || "data/config.json", function (config) {
     config.baseUrl = baseUrl;
     utils.initConfig(config);
 
-    Loader(makeUrl(baseUrl.path, config.loader.timeline)).finished(function (timeline) {
-      Loader(makeUrl(baseUrl.path, config.loader.items)).finished(function (data) {
+    // Instantiate the Timeline object (from timeline.js)
+    timeline = Timeline(); // NEW: Instantiate the timeline module here
+
+    // Determine the timeline data URL. If config.loader.timeline is undefined, it defaults to null.
+    // Kunsthaus config.json doesn't have a timeline property.
+    var timelineDataUrl = config.loader.timeline ? makeUrl(baseUrl.path, config.loader.timeline) : null;
+
+    // Load timeline data first (if URL exists), then items data
+    // If timelineDataUrl is null, Loader will call finished([])
+    Loader(timelineDataUrl).finished(function (_timelineData) { // _timelineData will be the loaded CSV data or an empty array
+      Loader(makeUrl(baseUrl.path, config.loader.items)).finished(function (_data) {
+        data = _data; // Assign to the global 'data' variable
         console.log(data);
 
         utils.clean(data, config.delimiter);
 
+        // Initialize timeline module with the loaded data (or empty array if not loaded)
+        timeline.init(_timelineData || [], config); // Pass loaded data (or empty array) to timeline.init
+
+        // tags = Tags(); // This line is present in Kunsthaus viz.js
+        // If config.filter and config.filter.type === "crossfilter" were used, it would be 'Crossfilter()'
+        // For standard setup, Tags() is typically used here.
+        // Assuming tags=Tags() as per your provided Kunsthaus tags.js:
+        tags = Tags(); // Keep this as it is in your current Kunsthaus viz.js
+
         tags.init(data, config);
         search.init();
-        canvas.init(data, timeline, config);
+        canvas.init(data, timeline, config); // MODIFIED: Pass the timeline OBJECT here
 
         if (config.loader.layouts) {
           initLayouts(config);
         } else {
-          canvas.setMode("time");
+          canvas.setMode({
+            title: "Time",
+            type: "group",
+            groupKey: "year"
+          });
         }
-
-        // setTimeout(function () {
-        //   var idx = 102
-        //   canvas.zoomToImage(data[idx], 100)
-        // }, 100);
 
         LoaderSprites()
           .progress(function (textures) {
-            Object.keys(textures).forEach(function (id) {
-              var sprite = data.find(function (d) {
-                return d.id === id;
-              })
-              if (sprite) {
-                sprite.sprite.texture = textures[id];
-              }
+            // Create a lookup map for faster access
+            const dataMap = new Map(
+              data
+                .filter(d => d.sprite) // Ensure sprite exists
+                .map(d => [d.id, d])
+            );
 
-              // data
-              //   .filter(function (d) {
-              //     return d.id === id;
-              //   })
-              //   .forEach(function (d) {
-              //     d.sprite.texture = textures[id];
-              //   });
+            Object.keys(textures).forEach(id => {
+              const item = dataMap.get(id);
+              if (item) item.sprite.texture = textures[id];
             });
             canvas.wakeup();
           })
