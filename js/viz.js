@@ -55,7 +55,18 @@ function init() {
 
   var baseUrl = utils.getDataBaseUrl();
   var makeUrl = utils.makeUrl;
-
+// Add this block to your viz.js
+// MODIFIED: Manually set baseUrl.path for GitHub Pages if it's empty
+// This assumes your repo name is 'stadtmuseums-viewer-v2' and it's served under your username.github.io/repo_name
+if (baseUrl.path === '') {
+  // Get the current URL path (e.g., /stadtmuseums-viewer-v2/index.html)
+  var currentPath = window.location.pathname;
+  // Extract the base path (e.g., /stadtmuseums-viewer-v2)
+  var repoNameMatch = currentPath.match(/^\/([^\/]+)\//);
+  if (repoNameMatch && repoNameMatch[1]) {
+      baseUrl.path = '/' + repoNameMatch[1] + '/'; // Set it to '/stadtmuseums-viewer-v2/'
+  }
+}
   console.log(baseUrl);
 
 d3.json(baseUrl.config || "data/config.json", function (config) {
