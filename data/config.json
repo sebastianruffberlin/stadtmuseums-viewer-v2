@@ -1,212 +1,124 @@
 {
   "project": {
-    "name": "Kunsthaus",
+    "name": "Stadtmuseum",
     "quality": 1
   },
   "loader": {
     "info": "data/info.md",
     "items": "data/data.csv",
+    "textures": {
+      "preview": "data/sprites/menu_small_web.json",
+      "medium": {
+        "size": 200,
+        "url": "data/sprites/spritesheet.json"
+      },
+      "detail": {
+        "size": 1024,
+        "url": "data/1024/"
+      }
+    },
     "layouts": [
       {
-        "title": "Zeit",
+        "title": "Datierung",
         "type": "group",
         "groupKey": "year"
       },
       {
-        "title": "Kaufpreis",
+        "title": "Farbe",
         "type": "group",
-        "groupKey": "year",
-        "y": "kaufpreischf"
+        "groupKey": "_Colors Color Name 1"
       },
       {
-        "title": "Ort",
+        "title": "Emotionen",
         "type": "group",
-        "groupKey": "stadt"
-      }
-    ],
-    "textures": {
-      "medium": {
-        "size": 200,
-        "url": "https://vikusviewer.fh-potsdam.de/kunsthaus/data/sprites/spritesheet.json"
+        "groupKey": "_KI Emotion",
+        "columns": 3
       },
-      "detail": {
-        "size": 1024,
-        "url": "https://vikusviewer.fh-potsdam.de/kunsthaus/data/1024/"
+      {
+        "title": "Stil",
+        "type": "group",
+        "groupKey": "_KI Style Tag 1",
+        "columns": 4
       },
-      "big": {
-        "size": 4096,
-        "url": "https://vikusviewer.fh-potsdam.de/kunsthaus/data/4096/"
+      {
+        "title": "Bildinhalt",
+        "url": "data/tsne.csv",
+        "scale": 0.8
+      },
+      {
+        "title": "Farbe plot",
+        "url": "data/colors.csv",
+        "scale": 0.9
       }
-    }
+    ]
   },
   "style": {
-    "fontColor": "#0000ff",
-    "fontColorActive": "#f0f0f0",
-    "fontBackground": "#333333",
-    "textShadow": "1px 1px 0px #f8f4e9",
-    "canvasBackground": "#ffffff",
-    "timelineBackground": "#fff9eb",
+    "fontColor": "#2b2b2b",
+    "fontColorActive": "#ffffff",
+    "fontBackground": "#2b2b2b",
+    "textShadow": "none",
+    "canvasBackground": "#f8f9fa",
+    "timelineBackground": "#f8f9fa",
     "timelineFontColor": "#000",
-    "backgroundHeader": "#333333",
-    "fontColorHeader": "#C6C6C6",
-    "detailBackground": "#0000ff",
-    "infoBackground": "#0000ff",
-    "infoFontColor": "#ffffff",
-    "searchbarBackground": "#DAA520"
+    "backgroundHeader": "#035151",
+    "fontColorHeader": "#fffefa",
+    "detailBackground": "#f8f9fa",
+    "infoBackground": "#f8f9fa",
+    "infoFontColor": "#2b2b2b",
+    "searchbarBackground": "#353535"
   },
   "projection": {
-    "columns": 3
+    "columns": 2
   },
   "detail": {
     "structure": [
       {
         "name": "Titel",
-        "source": "titel",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Entstehungszeit",
-        "source": "entstehungszeit",
+        "source": "_Titel",
         "display": "column",
         "type": "text"
       },
       {
         "name": "Künstler:in",
-        "source": "column.knstlerin + ' (' + column.lebensdaten + ')'",
-        "display": "column",
-        "type": "function",
-        "fields": [
-          "knstlerin",
-          "lebensdaten"
-        ]
-      },
-      {
-        "name": "Weitere Titel",
-        "source": "weiteretitel",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "",
-        "source": "",
-        "display": "column",
-        "type": "space"
-      },
-      {
-        "name": "Medium",
-        "source": "medium",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Dimensionen",
-        "source": "dimensionen",
+        "source": "_Künstler:in",
         "display": "column",
         "type": "text"
       },
       {
         "name": "Inventarnummer",
-        "source": "inventarnummer",
+        "source": "_Inventarnummer",
         "display": "column",
         "type": "text"
       },
       {
-        "name": "Signatur",
-        "source": "signatur",
+        "name": "Datierung Von",
+        "source": "_Datierung Von",
         "display": "column",
         "type": "text"
       },
       {
-        "name": "Werkverzeichnis",
-        "source": "werkverzeichnis",
+        "name": "Datierung Bis",
+        "source": "_Datierung Bis",
         "display": "column",
         "type": "text"
       },
       {
-        "name": "Gloornummer",
-        "source": "gloornummer",
+        "name": "Technik",
+        "source": "_Techniken",
         "display": "column",
         "type": "text"
       },
       {
-        "name": "Epoche",
-        "source": "epoche",
+        "name": "KI-Schlagworte",
+        "source": "_keywords",
         "display": "column",
-        "type": "text"
+        "type": "keywords"
       },
       {
-        "name": "Fälschung",
-        "source": "falsch",
+        "name": "Lizenz",
+        "source": "'<a href=https://creativecommons.org/publicdomain/mark/1.0/>Public Domain</a>'",
         "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "",
-        "source": "",
-        "display": "column",
-        "type": "space"
-      },
-      {
-        "name": "Besitz",
-        "source": "besitz",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Vorbesitzer:in",
-        "source": "column.vorbesitzerin + ' (' + column.stadt + ')'",
-        "display": "column",
-        "type": "function",
-        "fields": [
-          "vorbesitzerin",
-          "stadt"
-        ]
-      },
-      {
-        "name": "Raubkunst",
-        "source": "raubkunst",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Emigration Verfolgungskontext",
-        "source": "emigrationverfolgung",
-        "display": "column",
-        "type": "text"
-      },
-      {
-        "name": "Kaufpreis",
-        "source": "column.kaufpreischf + ' CHF'",
-        "display": "column",
-        "type": "function",
-        "fields": [
-          "kaufpreischf"
-        ]
-      },
-      {
-        "name": "",
-        "source": "",
-        "display": "column",
-        "type": "space"
-      },
-      {
-        "name": "provenienz",
-        "source": "provenienz",
-        "display": "wide",
-        "type": "html"
-      },
-      {
-        "name": "ausstellungen",
-        "source": "ausstellungen",
-        "display": "wide",
-        "type": "html"
-      },
-      {
-        "name": "literatur",
-        "source": "literatur",
-        "display": "wide",
-        "type": "html"
+        "type": "function"
       }
     ]
   }

@@ -127,10 +127,10 @@ function init() {
     });
 
   d3.select(".filterReset").on("click", function () {
-    canvas.resetZoom(function () {
-      tags.reset();
-      //canvas.split();
-    })
+      // Immediately reset the tags
+    tags.reset();
+      // Then call canvas.resetZoom, which also triggers canvas.project internally
+    canvas.resetZoom();
   });
   d3.select(".filterReset").on("dblclick", function () {
     console.log("dblclick");

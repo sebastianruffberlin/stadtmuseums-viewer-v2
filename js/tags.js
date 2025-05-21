@@ -2,15 +2,16 @@ function Tags() {
 
   var fontsize = d3.scale.linear().range([8, 17])
 
-  var filter = { vorbesitzerin: [], epoche: [], besitz: [], verkaufland: [], raubkunst: [], emi: [], falsch: [] };
+  // MODIFIED: Filter object updated to only include 'geschlecht'
+  var filter = { geschlecht: [] };
   var lock = false;
   var data;
+  // MODIFIED: sortArrays updated to include only 'geschlecht'
   var sortArrays = {
-    verkaufland: ["CH", "FR", "USA", "Raubkunst"],
-    besitz: ["Stiftung", "Privatbesitz", "Veräusserung", "Restitution", "anderes"],
-    epoche: ["Moderne", "Alte Meister", "Mittelalter"]
+    geschlecht: ["Mann", "Frau"]
   }
-  var removeKeys = ["Veräusserung", "Restitution", "anderes"];
+  // MODIFIED: removeKeys array is now empty as Kunsthaus-specific filters are removed
+  var removeKeys = []; // No longer needed for 'besitz' filter
 
   function addOrRemove(array, value) {
     array = array.slice();
@@ -27,14 +28,16 @@ function Tags() {
 
   tags.updateDom = function updateDom(key, filteredData) {
 
-    if (key === "vorbesitzerin") {
-      console.log("updateDom", key, filteredData)
-      fontsize.domain(d3.extent(filteredData, function (d) { return d.size; }))
-    }
+    // REMOVED: Kunsthaus-specific logic for 'vorbesitzerin' font sizing
+    // if (key === "vorbesitzerin") {
+    //   console.log("updateDom", key, filteredData)
+    //   fontsize.domain(d3.extent(filteredData, function (d) { return d.size; }))
+    // }
 
-    if (key === "besitz") {
-      filteredData = filteredData.filter(function (d) { return removeKeys.indexOf(d.key) == -1; })
-    }
+    // REMOVED: Kunsthaus-specific logic for 'besitz' filter data cleaning
+    // if (key === "besitz") {
+    //   filteredData = filteredData.filter(function (d) { return removeKeys.indexOf(d.key) == -1; })
+    // }
 
     if (sortArrays[key]) {
       var sorted = sortArrays[key]
@@ -43,6 +46,7 @@ function Tags() {
       })
     }
 
+    // This targets the HTML element with the class matching the key (e.g., '.geschlecht')
     var container = d3.select("." + key);
     var selection = container
       .selectAll(".item")
@@ -52,11 +56,9 @@ function Tags() {
       .enter()
       .append("div")
       .classed("item", true)
-      .classed("spacer", function (d) {
-        return d.key === "Fälschung";
-      })
-      // .classed("raubkunst", function (d) {
-      //   return d.key === "Raubkunst";
+      // REMOVED: Kunsthaus-specific classes like 'spacer' and 'raubkunst'
+      // .classed("spacer", function (d) {
+      //   return d.key === "Fälschung";
       // })
       .text(function (d) {
         return d.key;
@@ -64,23 +66,24 @@ function Tags() {
       .on("click", function (d) {
         lock = true;
         filter[key] = addOrRemove(filter[key], d.key);
-        tags.filter();
-        tags.update();
+        tags.filter(); // Re-evaluate and apply filters
+        tags.update(); // Re-render filter buttons
         lock = false;
       })
+      // MODIFIED: Apply font-size filter to 'geschlecht'
       .filter(function (d) {
-        return key === "vorbesitzerin"
+        return key === "geschlecht"; // Apply dynamic font sizing to 'geschlecht' filter buttons
       })
       .style("font-size", function (d) {
         return fontsize(d.size) + "px";
       })
 
     selection.exit()
-      // .remove()
       .classed("active", false)
       .classed("hide", true)
+      // MODIFIED: Apply font-size filter to 'geschlecht'
       .filter(function (d) {
-        return key === "vorbesitzerin"
+        return key === "geschlecht";
       })
       .remove()
       .style("font-size", function (d) {
@@ -93,8 +96,9 @@ function Tags() {
         return filter[key].indexOf(d.key) > -1;
       })
       .classed("hide", false)
+      // MODIFIED: Apply font-size filter to 'geschlecht'
       .filter(function (d) {
-        return key === "vorbesitzerin"
+        return key === "geschlecht";
       })
       .style("font-size", function (d) {
         return fontsize(d.size) + "px";
@@ -105,73 +109,77 @@ function Tags() {
   }
 
   tags.resize = function resize() {
-
+    // Ensure filters update on resize
+    tags.updateFilters();
   }
 
   tags.updateFilters = function updateFilters() {
 
-    var filters = Object.entries(filter) //.filter(function (d) { return d[1].length; })
+    // Use Object.keys(filter) to get all defined filter categories (e.g., ['geschlecht'])
+    var filtersToUpdate = Object.keys(filter);
 
-    // console.log("updateFilters", filters)
+    for (var a = 0; a < filtersToUpdate.length; a++) {
+      var currentFilterKey = filtersToUpdate[a];
+      var index = {};
 
-    for (var a = 0; a < filters.length; a++) {
-      var filterCur = filters[a];
-      var index = {}
-      var otherFilter = filters.filter(function (d) { return d != filterCur; })
-      // console.log(filter, "otherFilter", otherFilter)
+      var otherActiveFilters = Object.entries(filter).filter(function (d) {
+        return d[0] !== currentFilterKey && d[1].length > 0;
+      });
+
+      // Iterate through all data items to count how many belong to each value of currentFilterKey,
+      // considering other active filters.
       for (var i = 0; i < data.length; i++) {
         var d = data[i];
-        var hit = otherFilter.filter(function (otherFilter) {
-          return otherFilter[1].length === 0 || otherFilter[1].indexOf(d[otherFilter[0]]) > -1;
-        })
+        var hit = otherActiveFilters.filter(function (otherFilterEntry) {
+          return otherFilterEntry[1].indexOf(d[otherFilterEntry[0]]) > -1;
+        }).length == otherActiveFilters.length;
 
-        if (hit.length == otherFilter.length) {
-          index[d[filterCur[0]]] = ++index[d[filterCur[0]]] || 1;
+        if (hit) {
+          var itemValue = d[currentFilterKey];
+          if (itemValue !== undefined && itemValue !== null && itemValue !== "") {
+            index[itemValue] = ++index[itemValue] || 1;
+          }
         }
       }
-      var filteredData = Object.keys(index)
+
+      var filteredDataForDom = Object.keys(index)
         .map(function (d) { return { key: d, size: index[d] }; })
         .sort(function (a, b) { return b.size - a.size; })
         .filter(function (d) { return d.key != "" && d.key != "undefined"; });
 
-      // console.log("done", filterCur[0], filteredData)
-
-      tags.updateDom(filterCur[0], filteredData)
-
+      tags.updateDom(currentFilterKey, filteredDataForDom);
     }
   }
 
-
   tags.init = function (_data, config) {
-    // console.log("init tags", _data, config)
     data = _data;
-
-    tags.updateFilters()
+    tags.updateFilters(); // Initialize and draw the filter buttons
   }
 
-
   tags.update = function () {
-
+    // This `update` function primarily triggers re-calculation and re-rendering of the filter buttons.
     tags.updateFilters();
+    // After filters are updated, trigger canvas update as well
+    canvas.highlight();
+    canvas.project();
   }
 
   tags.reset = function () {
-    filter = { vorbesitzerin: [], epoche: [], besitz: [], verkaufland: [], raubkunst: [], emi: [], falsch: [] };
-    tags.filter();
-    tags.update();
+    // MODIFIED: Reset the filter object to only include 'geschlecht'
+    filter = { geschlecht: [] };
+    tags.filter(); // Apply the reset
+    tags.update(); // Update the UI
   }
 
   tags.filter = function (highlight) {
-    console.log("update filter", filter, highlight)
+    // d3.select(".infobar").classed("sneak", true); // Keep this if you want the infobar to sneak away on filter change
 
-    d3.select(".infobar").classed("sneak", true);
+    var filtersToApply = Object.entries(highlight || filter).filter(function (d) { return d[1].length; })
 
-    var filters = Object.entries(highlight || filter).filter(function (d) { return d[1].length; })
-    // console.log(filters)
     data.forEach(function (d) {
-      var active = filters.filter(function (f) {
+      var active = filtersToApply.filter(function (f) {
         return f[1].indexOf(d[f[0]]) > -1;
-      }).length == filters.length;
+      }).length == filtersToApply.length;
 
       if (highlight) {
         d.highlight = active;
@@ -183,8 +191,16 @@ function Tags() {
     if (!highlight) canvas.project();
   }
 
-  tags.search = function () { }
-
+  tags.search = function (query) {
+    // Add search functionality here if needed
+    // Example:
+    // if (query) {
+    //    // Implement search logic, e.g., filter 'data' based on 'query'
+    //    // Update d.active/d.highlight based on search results
+    // }
+    // tags.filter();
+    // tags.update();
+  }
 
   return tags;
 }
